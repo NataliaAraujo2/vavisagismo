@@ -10,5 +10,15 @@
 }
 
 .home h1 {
-    color: var(--main-dark);
+  color: var(--main-dark);
+}
+
+@media (max-width: 500px) {
+  .home h1 {
+    text-align: center;
+  }
+
+  .home p {
+    text-align: center;
+  }
 }

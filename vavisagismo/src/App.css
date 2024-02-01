@@ -2,3 +2,14 @@
   min-height:60vh;
   margin-bottom: 5em;
 }
+
+
+@media(max-width:500px) {
+  .container {
+    width: 100%;
+  }
+
+  .link_list {
+      flex-direction: column;
+  }
+}

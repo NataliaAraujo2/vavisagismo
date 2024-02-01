@@ -27,6 +27,19 @@
 }
 
 .active {
-    background-color: var(--main-dark);
-    color: var(--main-light);
+  background-color: var(--main-dark);
+  color: var(--main-light);
+}
+
+@media (max-width: 500px) {
+  .navbar {
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+    justify-content: space-around;
+  }
+
+  .link_list {
+    flex-direction: column;
+  }
 }
