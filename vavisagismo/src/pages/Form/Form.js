@@ -4,7 +4,7 @@ import styles from "./Form.module.css";
 const Form = () => {
   return (
     <div>
-      <h1>Form</h1>
+      <h1>Form1</h1>
     </div>
   );
 };
