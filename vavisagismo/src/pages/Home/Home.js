@@ -19,7 +19,7 @@ const Home = () => {
       ) : (
         <>
           <div>
-            <h1>Seja Bem Vindo {user.userName}!</h1>
+            <h1>Seja Bem Vindo {user.displayName}!</h1>
           </div>
           <div>
             <p>Envie novas informações através de nosso formulário ou veja seu histórico!</p>

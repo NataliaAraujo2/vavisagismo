@@ -4,7 +4,6 @@ import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
 
 const PersonalData = () => {
-  const [displayName, setDisplayName] = useState("");
   const [nickname, setNickname] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [occupation, setOccupation] = useState("");
@@ -17,7 +16,7 @@ const PersonalData = () => {
     "Casado",
     "Divorciado",
     "Separado",
-    "Em Uniião Estável",
+    "Em União Estável",
   ];
   const { user } = useAuthValue();
 
@@ -26,35 +25,33 @@ const PersonalData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
+
+    if (!nickname) {
+      setFormError("O apelido é obrigatório!");
+      return;
+    }
+    if (!birthDate) {
+      setFormError("A data de nascimento é obrigatória!");
+      return;
+    }
+    if (!occupation) {
+      setFormError("A profissão é obrigatória!");
+      return;
+    }
+    if (!civilStatus) {
+      setFormError("O estado civil é obrigatório!");
+      return;
+    }
+
     insertDocument({
       nickname,
       birthDate,
       occupation,
       civilStatus,
       uid: user.uid,
-      userName: user.displayName,
     });
 
-    if (!displayName) {
-      setDisplayName(user.displayName);
-    }
-    if (!nickname) {
-      setFormError("O nome é obrigatório!");
-      return
-    }
-    if (!birthDate) {
-      setFormError("O nome é obrigatório!");
-      return
-    }
-    if (!occupation) {
-      setFormError("O nome é obrigatório!");
-      return
-    }
-    if (!civilStatus) {
-      setFormError("O nome é obrigatório!");
-      return
-    }
-
+    console.log("Sucesso");
     setSuccess(true);
     setNickname("");
     setBirthDate("");
@@ -65,19 +62,10 @@ const PersonalData = () => {
   const handleChange = (e) => {
     setCivilStatus(e.target.value);
   };
+
   return (
     <div className={styles.personaldata}>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <span>Nome:</span>
-          <input
-            type="text"
-            name="displayName"
-            placeholder={user.displayName}
-            value={user.displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </label>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label>
           <span>Apelido:</span>
           <input

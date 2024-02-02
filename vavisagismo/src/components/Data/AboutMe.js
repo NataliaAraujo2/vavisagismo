@@ -28,17 +28,17 @@ const AboutMe = () => {
 
     if (!personalRevew) {
       setFormError("A análise pessoal é obrigatória!");
-      return
+      return;
     }
     if (!profissionalRevew) {
       setFormError("A análise profissional é obrigatório!");
-      return
+      return;
     }
     if (!socialRevew) {
       setFormError("A análise social é obrigatório!");
-      return
+      return;
     }
-  
+
     setSuccess(true);
     setPersonalRevew("");
     setProfissionalRevew("");
@@ -49,12 +49,11 @@ const AboutMe = () => {
   return (
     <div className={styles.aboutme}>
       <h2>Me fale um pouco sobre voce!</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label>
           <span>Análise Pessoal:</span>
           <textarea
             name="personalrevew"
-         
             placeholder="Como você se vê?"
             value={personalRevew}
             onChange={(e) => setPersonalRevew(e.target.value)}
@@ -64,7 +63,6 @@ const AboutMe = () => {
           <span>Análise Profissional:</span>
           <textarea
             name="profissionalrevew"
-       
             placeholder="Como você se vê como profissional?"
             value={profissionalRevew}
             onChange={(e) => setProfissionalRevew(e.target.value)}
@@ -74,7 +72,6 @@ const AboutMe = () => {
           <span>Análise Social:</span>
           <textarea
             name="socialrevew"
-       
             placeholder="Como você se vê na sociedade?"
             value={socialRevew}
             onChange={(e) => setSocialRevew(e.target.value)}
@@ -85,7 +82,6 @@ const AboutMe = () => {
           <input
             type="text"
             name="enneagramProfile"
-        
             placeholder="Perfil do Eneagrama"
             value={enneagramProfile}
             onChange={(e) => setEnneagramProfile(e.target.value)}

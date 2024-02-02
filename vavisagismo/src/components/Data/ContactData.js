@@ -34,7 +34,7 @@ const ContactData = () => {
     }
     if (!phoneNumber) {
       setFormError("O telefone é obrigatório!");
-      return
+      return;
     }
    
 
@@ -48,7 +48,7 @@ const ContactData = () => {
 
   return (
     <div className={styles.contactData}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}> 
         <label>
           <span>Email:</span>
           <input

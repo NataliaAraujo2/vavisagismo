@@ -26,6 +26,9 @@ input:focus {
   outline: none;
 }
 
+p{
+  padding: .5em;
+}
 a,
 nav button {
   text-decoration: none;
@@ -62,7 +65,7 @@ label span {
 
 input,
 textarea {
-  font-size: .7em;
+  font-size: 0.7em;
   font-family: "Lexend Zetta", sans-serif;
   box-sizing: border-box;
   border: none;
@@ -120,4 +123,10 @@ button:hover {
   padding: 5px;
   width: fit-content;
   font-weight: bolder;
+}
+
+@media (max-width: 500px) {
+  form {
+    max-width: 80%;
+  }
 }

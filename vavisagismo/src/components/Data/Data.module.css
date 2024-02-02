@@ -1,18 +1,18 @@
-form {
+.form {
   font-size: 1em;
   min-width: 100%;
   margin-left: 0;
 }
 
-h1 {
+.form h1 {
     margin-top: 0;
 }
 
-h2 {
+.form h2 {
     margin-top: 0;
 }
 
-p {
+.form p {
   text-align: justify;
 }
 
@@ -21,12 +21,10 @@ p {
     flex-direction: row;
 }
 
-
 .imagesform {
   margin-top: 1em;
   min-width: fit-content;
 }
-
 
 .radio {
   display: flex;

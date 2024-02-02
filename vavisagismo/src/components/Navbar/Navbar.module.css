@@ -37,7 +37,7 @@
     width: 100%;
     height: fit-content;
     padding: 0;
-    justify-content: space-around;
+    justify-content:space-around;
   }
 
   .link_list {
