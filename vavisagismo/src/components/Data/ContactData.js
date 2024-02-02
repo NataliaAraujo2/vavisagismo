@@ -1,31 +1,61 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import styles from "./Data.module.css";
 import PhoneMaskedInput from "../../mask/PhoneMaskedInput";
-
+import { useInsertDocument } from "../../hooks/useInsertDocument";
+import { useAuthValue } from "../../context/AuthContext";
 
 const ContactData = () => {
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber ] = useState();
-    const [instagram, setInstagram] = useState("");
-    const [facebook, setFacebook] = useState("");
-    const [linkedin, setLinkedin] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [instagram, setInstagram] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [formError, setFormError] = useState("");
+  const [success, setSuccess] = useState(false);
 
-    const handleSubmit =(e) => {
-      e.prevent.Default()
-  }
-  
+  const { user } = useAuthValue();
+
+  const { insertDocument, response } = useInsertDocument("contactdata");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormError("");
+    insertDocument({
+      email,
+      phoneNumber,
+      instagram,
+      facebook,
+      linkedin,
+      uid: user.uid,
+    });
+
+    if (!email) {
+      setEmail(user.email);
+    }
+    if (!phoneNumber) {
+      setFormError("O telefone é obrigatório!");
+      return
+    }
+   
+
+    setSuccess(true);
+    setEmail("");
+    setPhoneNumber("");
+    setInstagram("");
+    setFacebook("");
+    setLinkedin("");
+  };
 
   return (
     <div className={styles.contactData}>
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>
           <span>Email:</span>
           <input
             type="email"
             name="email"
-            required
-            placeholder="Email do usuário"
-            value={email}
+            placeholder={user.email}
+            value={user.email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
@@ -42,9 +72,8 @@ const ContactData = () => {
           <input
             type="text"
             name="instagram"
-            required
             placeholder="Endereço do Instagram"
-            value={instagram }
+            value={instagram}
             onChange={(e) => setInstagram(e.target.value)}
           />
         </label>
@@ -53,9 +82,8 @@ const ContactData = () => {
           <input
             type="text"
             name="facebook"
-            required
             placeholder="Endereço do Facebook"
-            value={facebook }
+            value={facebook}
             onChange={(e) => setFacebook(e.target.value)}
           />
         </label>
@@ -64,21 +92,19 @@ const ContactData = () => {
           <input
             type="text"
             name="linkedin"
-            required
             placeholder="Endereço do Linkedin"
-            value={linkedin }
+            value={linkedin}
             onChange={(e) => setLinkedin(e.target.value)}
           />
         </label>
-        <button>Enviar</button>
-    {/*
-     {!loading && <button>Enviar</button>}
-        {loading && <button disabled>Aguarde...</button>}
-        {error && <p className="error">{error}</p>}
-    */}   
-        </form>
+        {!response.loading && <button>Enviar</button>}
+        {response.loading && <button disabled>Aguarde...</button>}
+        {response.error && <p className="error">{response.error}</p>}
+        {formError && <p className="error">{formError}</p>}
+        {success && <p className="success">Respostas enviadas com sucesso!</p>}
+      </form>
     </div>
-  )
-}
+  );
+};
 
 export default ContactData;

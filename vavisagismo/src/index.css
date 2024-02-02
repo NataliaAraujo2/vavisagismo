@@ -62,6 +62,8 @@ label span {
 
 input,
 textarea {
+  font-size: .7em;
+  font-family: "Lexend Zetta", sans-serif;
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #ccc;
@@ -105,13 +107,17 @@ button:hover {
   color: var(--main-light);
   border-radius: 5px;
   padding: 5px;
+  width: fit-content;
+  font-weight: bolder;
 }
 
-.container .sucess {
+.container .success {
   color: var(--main-dark);
   font-weight: border;
   background-color: var(--main-light);
   border: 1px solid var(--main-light);
   border-radius: 5px;
   padding: 5px;
+  width: fit-content;
+  font-weight: bolder;
 }

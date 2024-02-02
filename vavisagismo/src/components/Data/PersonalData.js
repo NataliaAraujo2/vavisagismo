@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Data.module.css";
-
+import { useInsertDocument } from "../../hooks/useInsertDocument";
+import { useAuthValue } from "../../context/AuthContext";
 
 const PersonalData = () => {
   const [displayName, setDisplayName] = useState("");
@@ -8,7 +9,9 @@ const PersonalData = () => {
   const [birthDate, setBirthDate] = useState("");
   const [occupation, setOccupation] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
-  
+  const [formError, setFormError] = useState("");
+  const [success, setSuccess] = useState(false);
+
   const options = [
     "Solteiro",
     "Casado",
@@ -16,10 +19,48 @@ const PersonalData = () => {
     "Separado",
     "Em Uniião Estável",
   ];
+  const { user } = useAuthValue();
 
-  const handleSubmit =(e) => {
-    e.prevent.Default()
-}
+  const { insertDocument, response } = useInsertDocument("personaldata");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormError("");
+    insertDocument({
+      nickname,
+      birthDate,
+      occupation,
+      civilStatus,
+      uid: user.uid,
+      userName: user.displayName,
+    });
+
+    if (!displayName) {
+      setDisplayName(user.displayName);
+    }
+    if (!nickname) {
+      setFormError("O nome é obrigatório!");
+      return
+    }
+    if (!birthDate) {
+      setFormError("O nome é obrigatório!");
+      return
+    }
+    if (!occupation) {
+      setFormError("O nome é obrigatório!");
+      return
+    }
+    if (!civilStatus) {
+      setFormError("O nome é obrigatório!");
+      return
+    }
+
+    setSuccess(true);
+    setNickname("");
+    setBirthDate("");
+    setOccupation("");
+    setCivilStatus("");
+  };
 
   const handleChange = (e) => {
     setCivilStatus(e.target.value);
@@ -32,9 +73,8 @@ const PersonalData = () => {
           <input
             type="text"
             name="displayName"
-            required
-            placeholder="Qual o seu apelido?"
-            value={displayName}
+            placeholder={user.displayName}
+            value={user.displayName}
             onChange={(e) => setDisplayName(e.target.value)}
           />
         </label>
@@ -43,7 +83,6 @@ const PersonalData = () => {
           <input
             type="text"
             name="nickname"
-            required
             placeholder="Qual o seu apelido?"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
@@ -54,7 +93,6 @@ const PersonalData = () => {
           <input
             type="date"
             name="birthdate"
-            required
             placeholder="Dia, Mês e Ano de Nascimento"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
@@ -65,7 +103,6 @@ const PersonalData = () => {
           <input
             type="text"
             name="occupation"
-            required
             placeholder="Profissão"
             value={occupation}
             onChange={(e) => setOccupation(e.target.value)}
@@ -85,12 +122,12 @@ const PersonalData = () => {
             </label>
           ))}
         </label>
-        <button>Enviar</button>
-    {/*
-     {!loading && <button>Enviar</button>}
-        {loading && <button disabled>Aguarde...</button>}
-        {error && <p className="error">{error}</p>}
-    */}   
+
+        {!response.loading && <button>Enviar</button>}
+        {response.loading && <button disabled>Aguarde...</button>}
+        {response.error && <p className="error">{response.error}</p>}
+        {formError && <p className="error">{formError}</p>}
+        {success && <p className="success">Respostas enviadas com sucesso!</p>}
       </form>
     </div>
   );
