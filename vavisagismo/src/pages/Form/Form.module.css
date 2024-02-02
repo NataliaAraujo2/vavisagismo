@@ -1,0 +1,29 @@
+.form {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    padding: 0 2em 0 2em;
+}
+
+.buttons button {
+    white-space: normal;
+    width: 100%;
+}
+
+.component {
+    width: 85%;
+}
+
+.active {
+    background-color: var(--main-dark);
+    color: var(--main-light);
+    border-radius: 10px;
+  }

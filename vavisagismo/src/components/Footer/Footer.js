@@ -31,7 +31,7 @@ const Footer = () => {
       </div>
 
       <div>
-        <p>VAVisagismo &copy;2024</p>
+        <p>VMAVisagismo &copy;2024</p>
       </div>
     </footer>
   );

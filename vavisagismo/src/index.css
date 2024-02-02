@@ -18,6 +18,7 @@ code {
 input::placeholder,
 textarea::placeholder {
   font-family: "Lexend Zetta", sans-serif;
+  color: #aaa;
 }
 
 input:focus,
@@ -40,4 +41,77 @@ nav button {
 a:hover,
 nav button:hover {
   color: #bbb;
+}
+
+form {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+label span {
+  margin-bottom: 0.3em;
+  font-weight: bold;
+  text-align: left;
+}
+
+input,
+textarea {
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 0.8em 0;
+  background-color: transparent;
+}
+
+button {
+  font-family: "Lexend Zetta", sans-serif;
+  width: fit-content;
+  font-weight: bold;
+  background-color: var(--main-light);
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px solid var(--main-dark);
+  border-radius: 10px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+button[disabled] {
+  color: #aaa;
+  border: 1px solid var(--main-light);
+}
+
+button:hover {
+  font-size: 1em;
+}
+
+.danger {
+  background-color: var(--main-dark);
+  color: var(--main-light);
+}
+
+.container .error {
+  color: var(--main-dark);
+  font-weight: border;
+  background-color: var(--main-dark);
+  border: 1px solid var(--main-dark);
+  color: var(--main-light);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.container .sucess {
+  color: var(--main-dark);
+  font-weight: border;
+  background-color: var(--main-light);
+  border: 1px solid var(--main-light);
+  border-radius: 5px;
+  padding: 5px;
 }

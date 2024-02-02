@@ -29,6 +29,7 @@
 .active {
   background-color: var(--main-dark);
   color: var(--main-light);
+  border-radius: 10px;
 }
 
 @media (max-width: 500px) {
@@ -41,5 +42,9 @@
 
   .link_list {
     flex-direction: column;
+  }
+
+  .link_list li{
+    margin-bottom: .5em;
   }
 }
