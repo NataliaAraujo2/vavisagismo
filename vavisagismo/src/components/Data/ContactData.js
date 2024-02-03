@@ -47,7 +47,7 @@ const ContactData = () => {
   };
 
   return (
-    <div className={styles.contactData}>
+    <div>
       <form onSubmit={handleSubmit} className={styles.form}> 
         <label>
           <span>Email:</span>

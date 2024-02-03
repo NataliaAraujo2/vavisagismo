@@ -22,7 +22,6 @@ const AboutMe = () => {
       personalRevew,
       profissionalRevew,
       socialRevew,
-      enneagramProfile,
       uid: user.uid,
     });
 
@@ -75,16 +74,6 @@ const AboutMe = () => {
             placeholder="Como você se vê na sociedade?"
             value={socialRevew}
             onChange={(e) => setSocialRevew(e.target.value)}
-          />
-        </label>
-        <label>
-          <span>Perfil no Eneagrama</span>
-          <input
-            type="text"
-            name="enneagramProfile"
-            placeholder="Perfil do Eneagrama"
-            value={enneagramProfile}
-            onChange={(e) => setEnneagramProfile(e.target.value)}
           />
         </label>
         {!response.loading && <button>Enviar</button>}

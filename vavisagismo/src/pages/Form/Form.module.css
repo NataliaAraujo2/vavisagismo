@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   margin-top: 1em;
+  align-items: center;
   justify-content: space-around;
   width: 100%;
 }
@@ -10,7 +11,9 @@
   display: flex;
   flex-direction: column;
   width: 15%;
-  padding: 0 2em 0 2em;
+  margin-left: 1em;
+  padding: 0 2em 0 0;
+  
 }
 
 .buttons button {
@@ -18,15 +21,21 @@
   width: 100%;
 }
 
+.message {
+  text-align: center;
+}
+
 .component {
   width: 85%;
+  padding: 0 0 0 1em;
+  border-left: 5px double var(--main-dark);
 }
 
 .active {
   background-color: var(--main-dark);
-  color: var(--main-light);
-  border-radius: 10px;
+  color: var(--main-light)
 }
+
 
 @media (max-width: 500px) {
   .form {

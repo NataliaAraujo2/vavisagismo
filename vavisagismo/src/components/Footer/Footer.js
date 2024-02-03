@@ -16,9 +16,6 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.contact}>
         <div>
-            <h3>CONTATO</h3>
-        </div>
-        <div>
           <Link onClick={goInstagram}>
             <FaInstagram />
           </Link>

@@ -1,12 +1,13 @@
 .container {
-  min-height:60vh;
-  margin-bottom: 5em;
+  min-height:65vh;
+  margin-bottom: 1em;
 }
 
 
 @media(max-width:500px) {
   .container {
     width: 100%;
+    min-height: 75vh;
   }
 
   .link_list {
