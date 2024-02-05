@@ -4,18 +4,24 @@ import PersonalData from "../../components/Data/PersonalData";
 import ContactData from "../../components/Data/ContactData";
 import AboutMe from "../../components/Data/AboutMe";
 import Images from "../../components/Data/Images";
+import BodyMeasurement from "../../components/Data/BodyMeasurement";
+import AdditionalQuestions from "../../components/Data/AdditionalQuestions";
 
 const Form = () => {
   const [showPersonalData, setPersonalData] = useState(false);
   const [showContactdata, setContactData] = useState(false);
   const [showAboutMe, setAboutMe] = useState(false);
   const [showImages, setImages] = useState(false);
+  const [showBodyMeasurement, setBodyMeasurement] = useState();
+  const [showAdditionalQuestions, setAdditionalQuestions] = useState();
 
   const personalData = () => {
     setPersonalData(true);
     setContactData(false);
     setAboutMe(false);
     setImages(false);
+    setBodyMeasurement(false);
+    setAdditionalQuestions(false)
   };
 
   const contactData = () => {
@@ -23,6 +29,8 @@ const Form = () => {
     setContactData(true);
     setAboutMe(false);
     setImages(false);
+    setBodyMeasurement(false);
+    setAdditionalQuestions(false)
   };
 
   const aboutMe = () => {
@@ -30,6 +38,8 @@ const Form = () => {
     setContactData(false);
     setAboutMe(true);
     setImages(false);
+    setBodyMeasurement(false);
+    setAdditionalQuestions(false)
   };
 
   const images = () => {
@@ -37,7 +47,31 @@ const Form = () => {
     setContactData(false);
     setAboutMe(false);
     setImages(true);
+    setBodyMeasurement(false);
+    setAdditionalQuestions(false)
   };
+
+  const bodyMeasurement = () => {
+    setPersonalData(false);
+    setContactData(false);
+    setAboutMe(false);
+    setImages(false);
+    setBodyMeasurement(true);
+    setAdditionalQuestions(false)
+  };
+
+  const additionalQuestions = () => {
+    setPersonalData(false);
+    setContactData(false);
+    setAboutMe(false);
+    setImages(false);
+    setBodyMeasurement(false);
+    setAdditionalQuestions(true)
+  };
+
+
+  
+ 
 
   return (
     <div className={styles.form}>
@@ -57,11 +91,25 @@ const Form = () => {
         <button onClick={aboutMe} className={showAboutMe ? styles.active : ""}>
           Como eu me vejo
         </button>
+        <button
+          onClick={bodyMeasurement}
+          className={showBodyMeasurement ? styles.active : ""}
+        >
+          Medidas
+        </button>
+        <button onClick={additionalQuestions} className={showAdditionalQuestions ? styles.active : ""}>
+          Questões Complementares
+        </button>
         <button onClick={images} className={showImages ? styles.active : ""}>
           Fotos
         </button>
       </div>
-      {!showPersonalData && !showContactdata && !showAboutMe && !showImages ? (
+      {!showPersonalData &&
+      !showContactdata &&
+      !showAboutMe &&
+      !showImages &&
+      !showBodyMeasurement &&
+      !showAdditionalQuestions ? (
         <div className={styles.message}>
           <p>
             “Nossa imagem externa é nosso mensageiro, uma declaração pública.
@@ -85,6 +133,8 @@ const Form = () => {
           {showContactdata === true && <ContactData />}
           {showAboutMe === true && <AboutMe />}
           {showImages === true && <Images />}
+          {showBodyMeasurement === true && <BodyMeasurement />}
+          {showAdditionalQuestions ===true && <AdditionalQuestions />}
         </div>
       )}
     </div>

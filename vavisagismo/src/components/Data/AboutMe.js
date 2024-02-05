@@ -7,7 +7,6 @@ const AboutMe = () => {
   const [personalRevew, setPersonalRevew] = useState("");
   const [profissionalRevew, setProfissionalRevew] = useState();
   const [socialRevew, setSocialRevew] = useState("");
-  const [enneagramProfile, setEnneagramProfile] = useState("");
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -42,7 +41,6 @@ const AboutMe = () => {
     setPersonalRevew("");
     setProfissionalRevew("");
     setSocialRevew("");
-    setEnneagramProfile("");
   };
 
   return (

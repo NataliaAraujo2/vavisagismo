@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import { useAuthentication } from "../../hooks/useAuthentication";
+import { useInsertDocument } from "../../hooks/useInsertDocument";
+import { useAuthValue } from "../../context/AuthContext";
 
 const Register = () => {
   const [displayName, setDisplayName] = useState("");
@@ -10,6 +12,11 @@ const Register = () => {
   const [error, setError] = useState("");
 
   const { createUser, error: authError, loading } = useAuthentication();
+
+  const { user } = useAuthValue();
+
+  const { insertDocument, response } = useInsertDocument("aboutme");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +36,8 @@ const Register = () => {
     const res = await createUser(user);
 
     console.log(res);
+
+    
   };
 
   useEffect(() => {

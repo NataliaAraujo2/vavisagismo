@@ -51,7 +51,6 @@ const PersonalData = () => {
       uid: user.uid,
     });
 
-    console.log("Sucesso");
     setSuccess(true);
     setNickname("");
     setBirthDate("");
