@@ -23,6 +23,11 @@
   align-items: center;
 }
 
+.smoke {
+  display: flex;
+  flex-direction: row;
+}
+
 .images {
   display: flex;
   flex-direction: row;

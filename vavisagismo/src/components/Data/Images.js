@@ -7,7 +7,7 @@ import { storage } from "../../firebase/config";
 const Images = () => {
   //const uploads
   const [imgURL, setImgURL] = useState(null);
-  const [imagePreview, setImagePreview] = useState();
+  const [imagePreview, setImagePreview] = useState("");
   const [progress, setProgress] = useState(0);
   const [typeChoiced, setTypeChoiced] = useState("");
   const [formError, setFormError] = useState("");
@@ -25,23 +25,25 @@ const Images = () => {
   const faceFrontChoiced = (e) => {
     e.preventDefault();
     setFaceFront(true);
+    setTypeChoiced("facefront");
     setFaceSide(false);
     setNape(false);
     setBodyFront(false);
     setBodySide(false);
-    setBodyBack(false);
-    setTypeChoiced("facefront");
+    setBodyBack(false); 
+    setSuccess(false)
   };
 
   const faceSideChoiced = (e) => {
     e.preventDefault();
     setFaceFront(false);
     setFaceSide(true);
+    setTypeChoiced("faceSide");
     setNape(false);
     setBodyFront(false);
     setBodySide(false);
-    setBodyBack(false);
-    setTypeChoiced("faceSide");
+    setBodyBack(false);   
+    setSuccess(false)
   };
 
   const napeChoiced = (e) => {
@@ -49,10 +51,12 @@ const Images = () => {
     setFaceFront(false);
     setFaceSide(false);
     setNape(true);
+    setTypeChoiced("nape");
     setBodyFront(false);
     setBodySide(false);
     setBodyBack(false);
-    setTypeChoiced("nape");
+    setSuccess(false)
+    
   };
 
   const bodyFrontChoiced = (e) => {
@@ -61,9 +65,11 @@ const Images = () => {
     setFaceSide(false);
     setNape(false);
     setBodyFront(true);
+    setTypeChoiced("bodyFront");
     setBodySide(false);
     setBodyBack(false);
-    setTypeChoiced("bodyFront");
+    setSuccess(false)
+   
   };
 
   const bodySideChoiced = (e) => {
@@ -73,8 +79,8 @@ const Images = () => {
     setNape(false);
     setBodyFront(false);
     setBodySide(true);
-    setBodyBack(false);
     setTypeChoiced("bodySide");
+    setBodyBack(false); 
   };
 
   const bodyBackChoiced = (e) => {
@@ -119,21 +125,17 @@ const Images = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           setImgURL(url);
-          if(url) {
+          if (url) {
             setSuccess(true);
-            setImagePreview("")
+            setImagePreview("");
+            const imageInput = document.getElementById("image")
+            imageInput.value=""
           } else {
-            setFormError("Ocorreu um erro! Tente novamente mais tarde")
+            setFormError("Ocorreu um erro! Tente novamente mais tarde");
           }
         });
       }
     );
-
-   
-    
-
-  
-    
   };
 
   return (
@@ -192,7 +194,9 @@ const Images = () => {
 
       <div className={styles.imagepreview}>
         {!imagePreview && <img src="./logo.png" alt="Imagem" />}
-        {imagePreview && <img src={URL.createObjectURL(imagePreview)} alt="Foto escolhida" />}
+        {imagePreview && (
+          <img src={URL.createObjectURL(imagePreview)} alt="Foto escolhida" />
+        )}
       </div>
     </div>
   );

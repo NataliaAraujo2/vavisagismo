@@ -65,9 +65,9 @@ label span {
 
 input,
 textarea {
-  font-size: 0.7em;
+  font-size: 1em;
   font-family: "Lexend Zetta", sans-serif;
-  box-sizing: border-box;
+  box-sizing:border-box;
   border: none;
   border-bottom: 1px solid #ccc;
   padding: 0.8em 0;

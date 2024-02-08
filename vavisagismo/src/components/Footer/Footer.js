@@ -7,9 +7,9 @@ const Footer = () => {
   const goInstagram = () => {
     window.open("https://www.instagram.com/visagista_albuquerque/", "_blank");
   };
-  const whatsapp = process.env.REACT_APP_WHATSAPP;
+
   const goWhatsApp = () => {
-    window.open("https://wa.me/5511987587322", "blank");
+    window.open(`https://wa.me/5511987587322`, "blank");
   };
 
   return (
