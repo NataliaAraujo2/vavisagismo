@@ -30,8 +30,8 @@ const Images = () => {
     setNape(false);
     setBodyFront(false);
     setBodySide(false);
-    setBodyBack(false); 
-    setSuccess(false)
+    setBodyBack(false);
+    setSuccess(false);
   };
 
   const faceSideChoiced = (e) => {
@@ -42,8 +42,8 @@ const Images = () => {
     setNape(false);
     setBodyFront(false);
     setBodySide(false);
-    setBodyBack(false);   
-    setSuccess(false)
+    setBodyBack(false);
+    setSuccess(false);
   };
 
   const napeChoiced = (e) => {
@@ -55,8 +55,7 @@ const Images = () => {
     setBodyFront(false);
     setBodySide(false);
     setBodyBack(false);
-    setSuccess(false)
-    
+    setSuccess(false);
   };
 
   const bodyFrontChoiced = (e) => {
@@ -68,8 +67,7 @@ const Images = () => {
     setTypeChoiced("bodyFront");
     setBodySide(false);
     setBodyBack(false);
-    setSuccess(false)
-   
+    setSuccess(false);
   };
 
   const bodySideChoiced = (e) => {
@@ -80,7 +78,7 @@ const Images = () => {
     setBodyFront(false);
     setBodySide(true);
     setTypeChoiced("bodySide");
-    setBodyBack(false); 
+    setBodyBack(false);
   };
 
   const bodyBackChoiced = (e) => {
@@ -103,7 +101,10 @@ const Images = () => {
     }
 
     const file = e.target[0]?.files[0];
-    if (!file) return;
+    if (!file) {
+      setFormError("Selecione uma imagem");
+      return;
+    }
 
     const storageRef = ref(
       storage,
@@ -128,8 +129,8 @@ const Images = () => {
           if (url) {
             setSuccess(true);
             setImagePreview("");
-            const imageInput = document.getElementById("image")
-            imageInput.value=""
+            const imageInput = document.getElementById("image");
+            imageInput.value = "";
           } else {
             setFormError("Ocorreu um erro! Tente novamente mais tarde");
           }
@@ -186,10 +187,10 @@ const Images = () => {
             onChange={(e) => setImagePreview(e.target.files[0])}
           />
           <button type="submit">Enviar</button>
+          {!imgURL && <progress value={progress} max="100" />}
           {formError && <p className="error">{formError}</p>}
+          {success && <p className="success">Imagem enviada com sucesso!</p>}
         </form>
-        {!imgURL && <progress value={progress} max="100" />}
-        {success && <p className="success">Imagem enviada com sucesso!</p>}
       </div>
 
       <div className={styles.imagepreview}>

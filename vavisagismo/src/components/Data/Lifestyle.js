@@ -14,7 +14,7 @@ const Lifestyle = () => {
   const [success, setSuccess] = useState(false);
 
   const { user } = useAuthValue();
-  const { insertDocument, response } = useInsertDocument("physicalexercise");
+  const { insertDocument, response } = useInsertDocument("lifestyle");
 
   const options = ["Sim", "Não"];
 
@@ -36,6 +36,7 @@ const Lifestyle = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
+    setSuccess("")
 
     insertDocument({
       uid: user.uid,
@@ -48,16 +49,15 @@ const Lifestyle = () => {
     setSuccess(true);
     setSmoke("");
     setAlcohol("");
-
     setPhysicalExercise("");
     setTattoos("");
   };
 
   return (
     <div>
-      <h2>Me fale sobre o seu estilo de vida!</h2>
+    
       <form onSubmit={handleSubmit} className={styles.form}>
-
+      <h2>Me fale sobre o seu estilo de vida!</h2>
         <label>
           <span>Você Fuma (cigarro eletrônico, cigarro normal ou narguile)?</span>
           {options.map((option) => (

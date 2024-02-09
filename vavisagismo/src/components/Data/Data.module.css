@@ -1,3 +1,9 @@
+h2 {
+  margin: 2em 0 2em 0;
+  padding: 0;
+ 
+}
+
 .form {
   font-size: 1em;
   min-width: 100%;
@@ -21,6 +27,12 @@
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  text-align: center;
+}
+
+.radio input {
+  font-size: 1em;
+  margin-bottom: 0;
 }
 
 .smoke {
@@ -42,7 +54,7 @@
 }
 
 .images p {
-  margin-top: 5em;
+  margin-top: 2em;
   margin-bottom: 2em;
   padding: 0;
 }
@@ -82,7 +94,11 @@
   color: var(--main-light);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1400px)  {
+  h2 {
+    text-align: center;
+  }
+
   .images {
     min-width: none;
     display: flex;
@@ -116,5 +132,9 @@
 
   .imagesform .form {
     margin-bottom: 1em;
+  }
+
+  .PersonalAnalysis h2 {
+    text-align: center;
   }
 }

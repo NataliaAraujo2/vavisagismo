@@ -17,13 +17,8 @@ const BodyMeasurement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    insertDocument({
-      shoulderMeasure,
-      waistMeasure,
-      hipMeasure,
-      uid: user.uid,
-    });
+    setFormError("")
+    setSuccess("")
 
     if (!shoulderMeasure) {
       setFormError("A medida do ombro é obrigatória!");
@@ -39,6 +34,15 @@ const BodyMeasurement = () => {
       setFormError("A medida do quadril é obrigatória!");
       return;
     }
+
+    insertDocument({
+      shoulderMeasure,
+      waistMeasure,
+      hipMeasure,
+      uid: user.uid,
+    });
+
+   
 
     setSuccess(true);
     setShoulderMeasure("");

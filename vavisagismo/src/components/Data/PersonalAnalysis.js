@@ -4,43 +4,122 @@ import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
 
 const PersonalAnalysis = () => {
-  const [bodyAvaliation, setBodyAvaliation] = useState("");
+  const [nakedBody, setNakedBody] = useState("");
+  const [formallyDressed, setFormallyDressed] = useState("");
+  const [informallyDressed, setInformallyDressed] = useState("");
+  const [sunExposedSkin, setSunExposedSkin] = useState("");
+  const [faceMakeup, setFaceMakeup] = useState("");
+  const [cleanFace, setCleanFace] = useState("");
+
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
 
   const { user } = useAuthValue();
 
-  const { insertDocument, response } = useInsertDocument("personaldata");
+  const { insertDocument, response } = useInsertDocument("personalanalysis");
 
-  const questions = [
-    "Como voce avalia o seu corpo desnudo?",
-    "Como voce avalia o seu corpo vestido formalmente?",
-    "Como voce avalia o seu corpo vestido informalmente?",
-    
-  ];
+  const optionSunExposedSkin = ["Vermelha", "Rosada", "Dourada"];
 
-  const options = [];
-  for (let i = 0; i < 11; i++) {
-    options.push(i);
-  }
-
-  const bodyAvaliationChoice = (e) => {
+  const sunExposedSkinChoice = (e) => {
     e.preventDefault();
-    setBodyAvaliation(e.target.value);
+    setSunExposedSkin(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormError("");
+    setSuccess("");
+
+    insertDocument({
+      uid: user.uid,
+      nakedBody,
+      formallyDressed,
+      informallyDressed,
+      sunExposedSkin,
+      faceMakeup,
+      cleanFace,
+    });
+
+    setSuccess(true);
+    setNakedBody("");
+    setFormallyDressed("");
+    setInformallyDressed("");
+    setSunExposedSkin("");
+    setFaceMakeup("");
+    setCleanFace("");
   };
 
   return (
-    <div>
-      <form action="" className={styles.form}>
-        <h2>Para todas as perguntas de uma nota de 0 a 10 e comente!</h2>
-        {questions.map((question) => (
+    <div className={styles.PersonalAnalysis}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h2>Para todas as perguntas dê uma nota de 0 a 10 e comente!</h2>
+
         <label>
-         {question}
-            <input />
-      
-         
+          <span>Como voce avalia o seu corpo desnudo?</span>
+          <textarea
+            name="nakedBody"
+            placeholder=""
+            value={nakedBody}
+            onChange={(e) => setNakedBody(e.target.value)}
+          />
         </label>
-            ))}
+
+        <label>
+          <span>Como voce avalia o seu corpo vestido formalmente?</span>
+          <textarea
+            name="formallydressed"
+            placeholder=""
+            value={formallyDressed}
+            onChange={(e) => setFormallyDressed(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Como voce avalia o seu corpo vestido informalmente?</span>
+          <textarea
+            name="informallydressed"
+            placeholder=""
+            value={informallyDressed}
+            onChange={(e) => setInformallyDressed(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Como voce avalia o seu rosto maquiado?</span>
+          <textarea
+            name="faceMakeup"
+            placeholder=""
+            value={faceMakeup}
+            onChange={(e) => setFaceMakeup(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Como voce avalia o seu rosto sem maquiagem?</span>
+          <textarea
+            name="cleanFace"
+            placeholder=""
+            value={cleanFace}
+            onChange={(e) => setCleanFace(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Quando exposto ao sol como sua pele fica?</span>
+          {optionSunExposedSkin.map((option) => (
+            <label key={option} className={styles.radio}>
+              <input
+                type="radio"
+                id="sunExposedSkin"
+                value={sunExposedSkin}
+                checked={sunExposedSkin === option}
+                onChange={sunExposedSkinChoice}
+              />
+              {option}
+            </label>
+          ))}
+        </label>
+
         {!response.loading && <button>Enviar</button>}
         {response.loading && <button disabled>Aguarde...</button>}
         {response.error && <p className="error">{response.error}</p>}

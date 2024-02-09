@@ -52,8 +52,8 @@ const Health = () => {
 
   return (
     <div className={styles.aboutme}>
-      <h2>Me fale um pouco sobre a sua saúde</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h2>Me fale um pouco sobre a sua saúde</h2>
         <label>
           <span>Voce possui alguma patologia?</span>
           <textarea

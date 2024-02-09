@@ -20,6 +20,15 @@ const ContactData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
+
+    if (!email) {
+      setEmail(user.email);
+    }
+    if (!phoneNumber) {
+      setFormError("O telefone é obrigatório!");
+      return;
+    }
+    
     insertDocument({
       email,
       phoneNumber,
@@ -29,13 +38,7 @@ const ContactData = () => {
       uid: user.uid,
     });
 
-    if (!email) {
-      setEmail(user.email);
-    }
-    if (!phoneNumber) {
-      setFormError("O telefone é obrigatório!");
-      return;
-    }
+  
    
 
     setSuccess(true);

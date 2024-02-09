@@ -1,5 +1,6 @@
 .container {
-  min-height:65vh;
+  min-height:70vh;
+  margin-top: 9em;
   margin-bottom: 1em;
 }
 
@@ -8,6 +9,8 @@
   .container {
     width: 100%;
     min-height: 75vh;
+    margin-top: 0;
+    font-size: .8em;
   }
 
   .link_list {

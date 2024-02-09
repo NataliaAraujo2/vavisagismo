@@ -8,6 +8,7 @@ import BodyMeasurement from "../../components/Data/BodyMeasurement";
 import Lifestyle from "../../components/Data/Lifestyle";
 import Health from "../../components/Data/Health";
 import PersonalAnalysis from "../../components/Data/PersonalAnalysis";
+import PersonalStyle from "../../components/Data/PersonalStyle";
 
 const Form = () => {
   const [showPersonalData, setPersonalData] = useState(false);
@@ -16,9 +17,9 @@ const Form = () => {
   const [showImages, setImages] = useState(false);
   const [showBodyMeasurement, setBodyMeasurement] = useState(false);
   const [showLifestyle, setLifestyle] = useState(false);
-  const [showHealth, setHealth] = useState(false)
-  const [showPersonalAnalysis, setPersonalAnalysis] = useState(false)
-  
+  const [showHealth, setHealth] = useState(false);
+  const [showPersonalAnalysis, setPersonalAnalysis] = useState(false);
+  const [showPersonalStyle, setPersonalStyle] = useState(false);
 
   const personalData = () => {
     setPersonalData(true);
@@ -27,8 +28,10 @@ const Form = () => {
     setImages(false);
     setBodyMeasurement(false);
     setLifestyle(false);
-    setHealth(false)
-    setPersonalAnalysis(false)
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);
   };
 
   const contactData = () => {
@@ -38,8 +41,10 @@ const Form = () => {
     setImages(false);
     setBodyMeasurement(false);
     setLifestyle(false);
-    setHealth(false)
-    setPersonalAnalysis(false)
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);
   };
 
   const aboutMe = () => {
@@ -49,8 +54,10 @@ const Form = () => {
     setImages(false);
     setBodyMeasurement(false);
     setLifestyle(false);
-    setHealth(false)
-    setPersonalAnalysis(false)
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);
   };
 
   const images = () => {
@@ -60,8 +67,10 @@ const Form = () => {
     setImages(true);
     setBodyMeasurement(false);
     setLifestyle(false);
-    setHealth(false)
-    setPersonalAnalysis(false)
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);
   };
 
   const bodyMeasurement = () => {
@@ -71,8 +80,10 @@ const Form = () => {
     setImages(false);
     setBodyMeasurement(true);
     setLifestyle(false);
-    setHealth(false)
-    setPersonalAnalysis(false)
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);
   };
 
   const lifestyle = () => {
@@ -82,8 +93,10 @@ const Form = () => {
     setImages(false);
     setBodyMeasurement(false);
     setLifestyle(true);
-    setHealth(false)
-    setPersonalAnalysis(false)
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);
   };
 
   const health = () => {
@@ -93,8 +106,10 @@ const Form = () => {
     setImages(false);
     setBodyMeasurement(false);
     setLifestyle(false);
-    setHealth(true)
-    setPersonalAnalysis(false)
+    setHealth(true);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);
   };
 
   const personalAnalysis = () => {
@@ -104,8 +119,23 @@ const Form = () => {
     setImages(false);
     setBodyMeasurement(false);
     setLifestyle(false);
-    setHealth(false)
-    setPersonalAnalysis(true)
+    setHealth(false);
+    setPersonalAnalysis(true);
+    setPersonalStyle(false);
+    window.scrollTo(0, 0);  
+  };
+
+  const personalStyle = () => {
+    setPersonalData(false);
+    setContactData(false);
+    setAboutMe(false);
+    setImages(false);
+    setBodyMeasurement(false);
+    setLifestyle(false);
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(true);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -126,16 +156,12 @@ const Form = () => {
         <button onClick={aboutMe} className={showAboutMe ? styles.active : ""}>
           Quem eu sou
         </button>
-        <button onClick={personalAnalysis} className={showPersonalAnalysis ? styles.active : ""}>
+        <button
+          onClick={personalAnalysis}
+          className={showPersonalAnalysis ? styles.active : ""}
+        >
           Como eu me vejo
         </button>
-        <button
-          onClick={bodyMeasurement}
-          className={showBodyMeasurement ? styles.active : ""}
-        >
-          Medidas
-        </button>
-
         <button
           onClick={lifestyle}
           className={showLifestyle ? styles.active : ""}
@@ -143,10 +169,19 @@ const Form = () => {
           Estilo de Vida
         </button>
         <button
-          onClick={health}
-          className={showHealth ? styles.active : ""}
+          onClick={bodyMeasurement}
+          className={showBodyMeasurement ? styles.active : ""}
         >
+          Medidas
+        </button>
+        <button onClick={health} className={showHealth ? styles.active : ""}>
           Saúde
+        </button>
+        <button
+          onClick={personalStyle}
+          className={showPersonalStyle ? styles.active : ""}
+        >
+          Estilo Pessoal
         </button>
         <button onClick={images} className={showImages ? styles.active : ""}>
           Fotos
@@ -159,7 +194,8 @@ const Form = () => {
       !showBodyMeasurement &&
       !showLifestyle &&
       !showHealth &&
-      !showPersonalAnalysis ? (
+      !showPersonalAnalysis &&
+      !showPersonalStyle ? (
         <div className={styles.message}>
           <p>
             “Nossa imagem externa é nosso mensageiro, uma declaração pública.
@@ -187,6 +223,7 @@ const Form = () => {
           {showLifestyle === true && <Lifestyle />}
           {showHealth === true && <Health />}
           {showPersonalAnalysis === true && <PersonalAnalysis />}
+          {showPersonalStyle === true && <PersonalStyle />}
         </div>
       )}
     </div>

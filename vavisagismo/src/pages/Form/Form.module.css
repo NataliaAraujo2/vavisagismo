@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: row;
-  margin-top: 1em;
+  margin-top: 8em;
   align-items: center;
   justify-content: space-around;
   width: 100%;
@@ -13,7 +13,9 @@
   width: 15%;
   margin-left: 1em;
   padding: 0 2em 0 0;
-  
+  position: fixed;
+  top: 10em;
+  left: 0;  
 }
 
 .buttons button {
@@ -23,11 +25,16 @@
 
 .message {
   text-align: center;
+  margin-left: 17.5%;
+  margin-top: 1em;
+  width: 85%;
 }
 
 .component {
   width: 85%;
-  padding: 0 0 0 1em;
+  margin-left: 17.5%;
+  margin-top: 1em;
+  padding: 1em;
   border-left: 5px double var(--main-dark);
 }
 
@@ -37,24 +44,48 @@
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 1400px)  {
   .form {
     display: flex;
     flex-direction: column;
-    margin-top: 1em;
     justify-content: space-around;
     width: 100%;
-  }
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    width: fit-content;
-    padding: 0 1em 0 1em;
-    flex-wrap: wrap;
+    margin-top: 1em;
   }
 
+  .buttons {
+    position:relative;
+    top:0;
+    left: 0;  
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 95%;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--main-dark);
+  }
+
+  .buttons button {
+    white-space: normal;
+    width: 40%;
+    margin: .5em;
+  }
+
+  
+.message {
+  text-align: center;
+  margin-left: 0;
+  margin-top: 1em;
+  width: 85%;
+}
+
   .component {
-    padding: 0 2em 0 2em;
+    width: 90%;
+    margin-left: 0;
     margin-top: 1em;
+    padding: 1em;
+    border-left: none;
   }
 }

@@ -18,7 +18,7 @@ import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import History from "./pages/History/History";
-
+import About from "./pages/About/About";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -38,18 +38,37 @@ function App() {
 
   return (
     <div className="App">
-      <AuthProvider value={{user}}>
+      <AuthProvider value={{ user }}>
         <BrowserRouter>
           <Navbar />
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/form" element={user ? <Form /> : <Navigate to="/login" />} />
-              <Route path="/history" element={user ? <History /> : <Navigate to="/login" />} />
-              <Route path="/admin" element={user ? <Admin /> : <Navigate to="/login" />} />
-              <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
-              <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-              <Route path="/" element={user ? <Admin /> : <Navigate to="/login" />} />
+              <Route
+                path="/form"
+                element={user ? <Form /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/history"
+                element={user ? <History /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/admin"
+                element={user ? <Admin /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/register"
+                element={!user ? <Register /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/"
+                element={user ? <Admin /> : <Navigate to="/login" />}
+              />
+              <Route path="/about" element={<About />} />
             </Routes>
           </div>
           <Footer />

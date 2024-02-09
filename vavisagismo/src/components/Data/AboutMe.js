@@ -7,6 +7,10 @@ const AboutMe = () => {
   const [personalRevew, setPersonalRevew] = useState("");
   const [profissionalRevew, setProfissionalRevew] = useState();
   const [socialRevew, setSocialRevew] = useState("");
+  const [facingSituations, setFacingSituations] = useState("");
+  const [imageConvey, setImageConvey] = useState("");
+  const [reasonForConsultancy, setReasonForConsultancy] = useState("");
+  const [consultancyExpectations, setConsultancyExpectations] = useState("");
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -17,12 +21,6 @@ const AboutMe = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
-    insertDocument({
-      personalRevew,
-      profissionalRevew,
-      socialRevew,
-      uid: user.uid,
-    });
 
     if (!personalRevew) {
       setFormError("A análise pessoal é obrigatória!");
@@ -37,16 +35,31 @@ const AboutMe = () => {
       return;
     }
 
+    insertDocument({
+      personalRevew,
+      profissionalRevew,
+      socialRevew,
+      facingSituations,
+      imageConvey,
+      reasonForConsultancy,
+      consultancyExpectations,
+      uid: user.uid,
+    });
+
     setSuccess(true);
     setPersonalRevew("");
     setProfissionalRevew("");
     setSocialRevew("");
+    setFacingSituations("");
+    setImageConvey("");
+    setReasonForConsultancy("");
+    setConsultancyExpectations("");
   };
 
   return (
     <div className={styles.aboutme}>
-      <h2>Me fale um pouco sobre voce!</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h2>Me fale um pouco sobre voce!</h2>
         <label>
           <span>Análise Pessoal:</span>
           <textarea
@@ -72,6 +85,33 @@ const AboutMe = () => {
             placeholder="Como você se vê na sociedade?"
             value={socialRevew}
             onChange={(e) => setSocialRevew(e.target.value)}
+          />
+        </label>
+        <label>
+          <span>Sabe enfrentar situações distintas?</span>
+          <textarea
+            name="facingSituations"
+            placeholder=""
+            value={facingSituations}
+            onChange={(e) => setFacingSituations(e.target.value)}
+          />
+        </label>
+        <label>
+          <span>O que você gostaria de transmitir com a sua imagem?</span>
+          <textarea
+            name="imageConvey"
+            placeholder=""
+            value={imageConvey}
+            onChange={(e) => setImageConvey(e.target.value)}
+          />
+        </label>
+        <label>
+          <span>O que voce espera da consultoria visagista?</span>
+          <textarea
+            name="consultancyExpectations"
+            placeholder=""
+            value={consultancyExpectations}
+            onChange={(e) => setConsultancyExpectations(e.target.value)}
           />
         </label>
         {!response.loading && <button>Enviar</button>}
