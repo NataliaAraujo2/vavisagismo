@@ -21,7 +21,7 @@ const Navbar = () => {
                 to="/about"
                 className={({ isActive }) => (isActive ? styles.active : "")}
               >
-                Sobre
+                Sobre mim
               </NavLink>
             </li>
             <li>

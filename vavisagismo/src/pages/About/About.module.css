@@ -6,7 +6,6 @@
   margin-top: 8em;
   align-items: center;
   justify-content: space-around;
-
 }
 
 .about img {
@@ -18,8 +17,33 @@
 }
 
 .text {
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  margin-right: 1em;
+}
+
+@media (max-width: 1000px) {
+  .about {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0em;
+  }
+
+  .about img {
+    width: 40%;
+    height: auto;
+    border: 10px solid var(--main-dark);
+    box-sizing: border-box;
+    margin-top: 2em;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
     text-align: justify;
-    margin-right: 1em;
+    margin: 1em;
+  }
 }

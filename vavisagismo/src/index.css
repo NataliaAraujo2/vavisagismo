@@ -122,7 +122,7 @@ button[disabled] {
   font-weight: bolder;
 }
 
-@media (max-width: 1400px)  {
+@media (max-width: 1000px)  {
   form {
     max-width: 80%;
   }

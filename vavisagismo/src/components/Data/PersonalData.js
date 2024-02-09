@@ -4,7 +4,6 @@ import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
 
 const PersonalData = () => {
-  const [nickname, setNickname] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [occupation, setOccupation] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
@@ -19,6 +18,7 @@ const PersonalData = () => {
     "Em União Estável",
   ];
   const { user } = useAuthValue();
+  const userName = user.displayName;
 
   const { insertDocument, response } = useInsertDocument("personaldata");
 
@@ -26,10 +26,6 @@ const PersonalData = () => {
     e.preventDefault();
     setFormError("");
 
-    if (!nickname) {
-      setFormError("O apelido é obrigatório!");
-      return;
-    }
     if (!birthDate) {
       setFormError("A data de nascimento é obrigatória!");
       return;
@@ -44,7 +40,7 @@ const PersonalData = () => {
     }
 
     insertDocument({
-      nickname,
+      userName,
       birthDate,
       occupation,
       civilStatus,
@@ -52,7 +48,6 @@ const PersonalData = () => {
     });
 
     setSuccess(true);
-    setNickname("");
     setBirthDate("");
     setOccupation("");
     setCivilStatus("");
@@ -66,13 +61,12 @@ const PersonalData = () => {
     <div className={styles.personaldata}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label>
-          <span>Apelido:</span>
+          <span>Nome:</span>
           <input
             type="text"
             name="nickname"
-            placeholder="Qual o seu apelido?"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
+            placeholder={userName}
+            value={userName}
           />
         </label>
         <label>

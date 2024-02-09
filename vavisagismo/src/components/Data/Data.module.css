@@ -94,7 +94,7 @@ h2 {
   color: var(--main-light);
 }
 
-@media (max-width: 1400px)  {
+@media (max-width: 1000px)  {
   h2 {
     text-align: center;
   }
