@@ -120,15 +120,6 @@ const Health = () => {
           />
         </label>
         <label>
-          <span>Voce faz algum tratamento corporal ou facial? Quais?</span>
-          <textarea
-            name="bodytreatment"
-            placeholder="Cite qualquer tratamento (corporal ou facial) !"
-            value={bodyTreatment}
-            onChange={(e) => setBodyTreatment(e.target.value)}
-          />
-        </label>
-        <label>
           <span>Voce faz uso de alguma prótese? Quais?</span>
           <textarea
             name="prosthetic"

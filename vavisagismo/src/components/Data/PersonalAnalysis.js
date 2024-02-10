@@ -20,10 +20,10 @@ const PersonalAnalysis = () => {
 
   const optionSunExposedSkin = ["Vermelha", "Rosada", "Dourada"];
 
-  const sunExposedSkinChoice = (e) => {
-    e.preventDefault();
+  const handleChange = (e) => {
     setSunExposedSkin(e.target.value);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,10 +110,9 @@ const PersonalAnalysis = () => {
             <label key={option} className={styles.radio}>
               <input
                 type="radio"
-                id="sunExposedSkin"
-                value={sunExposedSkin}
+                value={option}
                 checked={sunExposedSkin === option}
-                onChange={sunExposedSkinChoice}
+                onChange={handleChange}
               />
               {option}
             </label>

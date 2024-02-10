@@ -75,15 +75,6 @@ const PersonalStyle = () => {
           />
         </label>
         <label>
-          <span>Usa acessórios? Quais mais gosta?</span>
-          <textarea
-            name="style"
-            placeholder=""
-            value={style}
-            onChange={(e) => setStyle(e.target.value)}
-          />
-        </label>
-        <label>
           <span>Prefere se vestir no verão ou no inverno?</span>
           <textarea
             name="seasons"

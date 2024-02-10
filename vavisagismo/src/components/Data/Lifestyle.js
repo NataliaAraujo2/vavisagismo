@@ -7,6 +7,7 @@ const Lifestyle = () => {
   const [smoke, setSmoke] = useState("");
   const [smokeType, setSmokeType] = useState("");
   const [alcohol, setAlcohol] = useState("");
+  const [alcoholfrequency, setAlcoholFrequency] =useState("")
   const [physicalExercise, setPhysicalExercise] = useState("");
   const [tattoos, setTattoos] = useState("");
 
@@ -41,7 +42,9 @@ const Lifestyle = () => {
     insertDocument({
       uid: user.uid,
       smoke,
+      smokeType,
       alcohol,
+      alcoholfrequency,
       physicalExercise,
       tattoos,
     });
@@ -77,7 +80,7 @@ const Lifestyle = () => {
           <span>Se sim, Qual?</span>
           <input
             type="text"
-            name="birthdate"
+            name="smoketype"
             placeholder="Cigarro Normal, Narguile, Cigarro Eletrônico"
             value={smokeType}
             onChange={(e) => setSmokeType(e.target.value)}
@@ -104,10 +107,10 @@ const Lifestyle = () => {
           <span>Se sim, com qual frequência?</span>
           <input
             type="text"
-            name="birthdate"
-            placeholder="Cigarro Normal, Narguile, Cigarro Eletrônico"
-            value={smokeType}
-            onChange={(e) => setSmokeType(e.target.value)}
+            name="alcoholfrequency"
+            placeholder=""
+            value={alcoholfrequency}
+            onChange={(e) => setAlcoholFrequency(e.target.value)}
           />
         </label>
         <label>
