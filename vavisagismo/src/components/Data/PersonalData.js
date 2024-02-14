@@ -16,6 +16,7 @@ const PersonalData = () => {
     "Divorciado",
     "Separado",
     "Em União Estável",
+    "Viúvo",
   ];
   const { user } = useAuthValue();
   const userName = user.displayName;
@@ -40,7 +41,7 @@ const PersonalData = () => {
     }
 
     insertDocument({
-      userName,
+      userName: user.displayName,
       birthDate,
       occupation,
       civilStatus,
@@ -60,15 +61,7 @@ const PersonalData = () => {
   return (
     <div className={styles.personaldata}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label>
-          <span>Nome:</span>
-          <input
-            type="text"
-            name="nickname"
-            placeholder={userName}
-            value={userName}
-          />
-        </label>
+        <h2>{userName}, vamos começar?</h2>
         <label>
           <span>Data de Nascimento:</span>
           <input
@@ -95,6 +88,7 @@ const PersonalData = () => {
             <label key={option} className={styles.radio}>
               <input
                 type="radio"
+                name="civilStatus"
                 value={option}
                 checked={civilStatus === option}
                 onChange={handleChange}

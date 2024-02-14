@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./Data.module.css";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
@@ -11,6 +11,11 @@ const BodyMeasurement = () => {
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState(false);
 
+  //ureRef focus
+const shoulderMeasureRef = useRef(null)
+const waistMeasureRef = useRef(null)
+const hipMeasureRef = useRef(null)
+
   const { user } = useAuthValue();
 
   const { insertDocument, response } = useInsertDocument("bodyMeasurement");
@@ -22,16 +27,19 @@ const BodyMeasurement = () => {
 
     if (!shoulderMeasure) {
       setFormError("A medida do ombro é obrigatória!");
+      shoulderMeasureRef.current.focus()
       return;
     }
 
     if (!waistMeasure) {
       setFormError("A medida do cintura é obrigatória!");
+      waistMeasureRef.current.focus()
       return;
     }
 
     if (!hipMeasure) {
       setFormError("A medida do quadril é obrigatória!");
+      hipMeasureRef.current.focus()
       return;
     }
 
@@ -58,6 +66,7 @@ const BodyMeasurement = () => {
           <textarea
             name="shouldermeasure"
             placeholder="Medida do ombro em cm"
+            ref={shoulderMeasureRef}
             value={shoulderMeasure}
             onChange={(e) => setShoulderMeasure(e.target.value)}
           />
@@ -67,6 +76,7 @@ const BodyMeasurement = () => {
           <textarea
             name="waistmeasure"
             placeholder="Medida da cintura em cm"
+            ref={waistMeasureRef}
             value={waistMeasure}
             onChange={(e) => setWaistMeasure(e.target.value)}
           />
@@ -74,8 +84,9 @@ const BodyMeasurement = () => {
         <label>
           <span>Medida do Quadril (Circunferência - meio do bumbum):</span>
           <textarea
-            name="socialrevew"
+            name="hipMeasure"
             placeholder="Medida do bumbum em cm"
+            ref={hipMeasureRef}
             value={hipMeasure}
             onChange={(e) => setHipMeasure(e.target.value)}
           />
