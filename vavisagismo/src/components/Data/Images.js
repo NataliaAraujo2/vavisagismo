@@ -32,6 +32,7 @@ const Images = () => {
     setBodySide(false);
     setBodyBack(false);
     setSuccess(false);
+    setImgURL(null)
   };
 
   const faceSideChoiced = (e) => {
@@ -44,6 +45,7 @@ const Images = () => {
     setBodySide(false);
     setBodyBack(false);
     setSuccess(false);
+    setImgURL(null)
   };
 
   const napeChoiced = (e) => {
@@ -56,6 +58,7 @@ const Images = () => {
     setBodySide(false);
     setBodyBack(false);
     setSuccess(false);
+    setImgURL(null)
   };
 
   const bodyFrontChoiced = (e) => {
@@ -68,6 +71,7 @@ const Images = () => {
     setBodySide(false);
     setBodyBack(false);
     setSuccess(false);
+    setImgURL(null)
   };
 
   const bodySideChoiced = (e) => {
@@ -79,6 +83,8 @@ const Images = () => {
     setBodySide(true);
     setTypeChoiced("bodySide");
     setBodyBack(false);
+    setSuccess(false);
+    setImgURL(null)
   };
 
   const bodyBackChoiced = (e) => {
@@ -90,6 +96,8 @@ const Images = () => {
     setBodySide(false);
     setBodyBack(true);
     setTypeChoiced("bodyBack");
+    setSuccess(false);
+    setImgURL(null)
   };
 
   const handleUpload = (e) => {
@@ -131,6 +139,7 @@ const Images = () => {
             setImagePreview("");
             const imageInput = document.getElementById("image");
             imageInput.value = "";
+            setImgURL(null)
           } else {
             setFormError("Ocorreu um erro! Tente novamente mais tarde");
           }
