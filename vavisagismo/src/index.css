@@ -129,6 +129,13 @@ button[disabled] {
 
   input,
   textarea {
-    font-size: 0.6em;
+    font-size: 0.8em;
+  }
+
+  button {
+    font-size: 0.8em;
+    margin: 0.2em;
+    margin-bottom: 0.5em;
+    padding: 0.3em;
   }
 }
