@@ -40,7 +40,7 @@ const Health = () => {
     e.preventDefault();
     const pathologiesToggleDisabled = document.querySelector("#pathologies");
     pathologiesToggleDisabled.disabled = true;
-    setPathologies("Não Possui");
+    setPathologies("Não possuo nenhuma patologia.");
   };
   const handleYesPathologies = (e) => {
     e.preventDefault();
@@ -63,7 +63,7 @@ const Health = () => {
     const dietPathologiesToggleDisabled =
       document.querySelector("#dietpathologies");
     dietPathologiesToggleDisabled.disabled = true;
-    setDietPathologies("Não Possui");
+    setDietPathologies("Não faço nenhuma dieta ligada a qualquer patologia.");
   };
 
   //Medicines Form
@@ -71,7 +71,7 @@ const Health = () => {
     e.preventDefault();
     const pathologiesToggleDisabled = document.querySelector("#medicines");
     pathologiesToggleDisabled.disabled = true;
-    setMedicines("Não Possui");
+    setMedicines("Não faço uso de medicamentos.");
   };
 
   const handleYesMedicines = (e) => {
@@ -86,7 +86,7 @@ const Health = () => {
     e.preventDefault();
     const allergiesToggleDisabled = document.querySelector("#allergies");
     allergiesToggleDisabled.disabled = true;
-    setAllergies("Não Possui");
+    setAllergies("Não possuo nenhuma alergia.");
   };
 
   const handleYesAllergies = (e) => {
@@ -102,7 +102,7 @@ const Health = () => {
     const estheticTreatmentToggleDisabled =
       document.querySelector("#esthetictreatment");
     estheticTreatmentToggleDisabled.disabled = true;
-    setEstheticTreatment("Não Possui");
+    setEstheticTreatment("Não realizo nenhum tratamento estético.");
   };
 
   const handleYesEstheticTreatment = (e) => {
@@ -119,7 +119,7 @@ const Health = () => {
   const surgeryToggleDisabled =
     document.querySelector("#surgery");
   surgeryToggleDisabled.disabled = true;
-  setSurgery("Não Possui");
+  setSurgery("Nunca realizei nenhuma cirúrgia.");
 };
 
 const handleYesSurgery = (e) => {
@@ -136,7 +136,7 @@ const handleYesSurgery = (e) => {
   const prostheticToggleDisabled =
     document.querySelector("#prosthetic");
   prostheticToggleDisabled.disabled = true;
-  setProsthetic("Não Possui");
+  setProsthetic("Não possuo próteses.");
 };
 
 const handleYesProsthetic = (e) => {
@@ -154,7 +154,7 @@ const handleYesProsthetic = (e) => {
   const dentalTreatmentToggleDisabled =
     document.querySelector("#dentaltreatment");
   dentalTreatmentToggleDisabled.disabled = true;
-  setDentalTreatment("Não Possui");
+  setDentalTreatment("Não realizao nenhum tratamento dentério.");
 };
 
 const handleYesDentalTreatment = (e) => {
@@ -164,8 +164,6 @@ const handleYesDentalTreatment = (e) => {
     dentalTreatmentToggleDisabled.disabled = false;
   setDentalTreatment("");
 };
-
-
 
 
   const handleSubmit = (e) => {
