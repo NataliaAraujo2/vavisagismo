@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./Data.module.css";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
 
 const Lifestyle = () => {
+  //const forms
   const [smoke, setSmoke] = useState("");
-  const [smokeType, setSmokeType] = useState("");
   const [alcohol, setAlcohol] = useState("");
-  const [alcoholfrequency, setAlcoholFrequency] =useState("")
   const [physicalExercise, setPhysicalExercise] = useState("");
   const [tattoos, setTattoos] = useState("");
+
+  //Ref to focus
+  const smokeRef = useRef(null);
+  const alcoholRef = useRef(null);
+  const physicalExerciseRef = useRef(null);
+  const tattoosRef = useRef(null);
 
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -17,34 +22,106 @@ const Lifestyle = () => {
   const { user } = useAuthValue();
   const { insertDocument, response } = useInsertDocument("lifestyle");
 
-  const options = ["Sim", "Não"];
-
-  const smokeChoice = (e) => {
+  //Smoke Form
+  const handleNoSmoke = (e) => {
     e.preventDefault();
-    setSmoke(e.target.value);
+    const smokeToggleDisabled = document.querySelector("#smoke");
+    smokeToggleDisabled.disabled = true;
+    setSmoke("Não Fuma");
+  };
+  const handleYesSmoke = (e) => {
+    e.preventDefault();
+    const smokeToggleDisabled = document.querySelector("#smoke");
+    smokeToggleDisabled.disabled = false;
+    setSmoke("");
   };
 
-  const alcoholChoice = (e) => {
+  //Alcohol Form
+  const handleNoAlcohol = (e) => {
     e.preventDefault();
-    setAlcohol(e.target.value);
+    const alcoholToggleDisabled = document.querySelector("#alcohol");
+    alcoholToggleDisabled.disabled = true;
+    setAlcohol("Não Bebe");
+  };
+  const handleYesAlcohol = (e) => {
+    e.preventDefault();
+    const alcoholToggleDisabled = document.querySelector("#alcohol");
+    alcoholToggleDisabled.disabled = false;
+    setAlcohol("");
   };
 
-  const tattoosChoice = (e) => {
+  //physicalExercise Form
+  const handleNoPhysicalExercise = (e) => {
     e.preventDefault();
-    setTattoos(e.target.value);
+    const physicalExerciseToggleDisabled =
+      document.querySelector("#physicalExercise");
+    physicalExerciseToggleDisabled.disabled = true;
+    setPhysicalExercise("Nunca faz exercícios físicos.");
+  };
+  const handleYesPhysicalExercise = (e) => {
+    e.preventDefault();
+    const physicalExerciseToggleDisabled =
+      document.querySelector("#physicalExercise");
+    physicalExerciseToggleDisabled.disabled = false;
+    setPhysicalExercise("");
+  };
+
+  //tatoos Form
+  const handleNoTattoos = (e) => {
+    e.preventDefault();
+    const tattoosToggleDisabled = document.querySelector("#tattoos");
+    tattoosToggleDisabled.disabled = true;
+    setTattoos("Não possui nenhuma tatuagem.");
+  };
+  const handleYesTattoos = (e) => {
+    e.preventDefault();
+    const tattoosToggleDisabled = document.querySelector("#tattoos");
+    tattoosToggleDisabled.disabled = false;
+    setTattoos("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
-    setSuccess("")
+    setSuccess(false);
+
+    if (!smoke) {
+      setFormError(
+        "Responda SIM ou Não. Se sim, informe a frequência e qual cigarro."
+      );
+      smokeRef.current.focus();
+      return;
+    }
+
+    
+    if (!alcohol) {
+      setFormError(
+        "Responda SIM ou Não. Se sim, informe a frequência e quais bebidas."
+      );
+      alcoholRef.current.focus();
+      return;
+    }
+       
+    if (!physicalExercise) {
+      setFormError(
+        "Responda SIM ou Não. Se sim, informe a frequência e quais exercícios."
+      );
+      physicalExerciseRef.current.focus();
+      return;
+    }
+
+    if (!tattoos) {
+      setFormError(
+        "Responda SIM ou Não. Se sim, descreva suas tatuagens.."
+      );
+      tattoosRef.current.focus();
+      return;
+    }
 
     insertDocument({
       uid: user.uid,
       smoke,
-      smokeType,
       alcohol,
-      alcoholfrequency,
       physicalExercise,
       tattoos,
     });
@@ -58,84 +135,78 @@ const Lifestyle = () => {
 
   return (
     <div>
-    
       <form onSubmit={handleSubmit} className={styles.form}>
-      <h2>Me fale sobre o seu estilo de vida!</h2>
+        <h2>Me fale sobre o seu estilo de vida!</h2>
         <label>
-          <span>Você Fuma (cigarro eletrônico, cigarro normal ou narguile)?</span>
-          {options.map((option) => (
-            <label key={option} className={styles.radio}>
-              <input
-                type="radio"
-                id="smoke"
-                value={option}
-                checked={smoke === option}
-                onChange={smokeChoice}
-              />
-              {option}
-            </label>
-          ))}
+          <div>
+            <span>
+              Você Fuma (cigarro eletrônico, cigarro normal ou narguile)? Se
+              sim, qual e com frequência?
+            </span>
+            <button onClick={handleYesSmoke}>SIM</button>
+            <button onClick={handleNoSmoke}>Não</button>
+          </div>
+          <textarea
+            name="smoke"
+            id="smoke"
+            placeholder="Cite qual cigarro fuma e com que frequência"
+            value={smoke}
+            onChange={(e) => setSmoke(e.target.value)}
+            ref={smokeRef}
+          />
         </label>
         <label>
-          <span>Se sim, Qual?</span>
-          <input
-            type="text"
-            name="smoketype"
-            placeholder="Cigarro Normal, Narguile, Cigarro Eletrônico"
-            value={smokeType}
-            onChange={(e) => setSmokeType(e.target.value)}
+          <div>
+            <span>
+              Você consome bebidas alcoólicas? Se sim, com qual frequência?
+            </span>
+            <button onClick={handleYesAlcohol}>SIM</button>
+            <button onClick={handleNoAlcohol}>Não</button>
+          </div>
+          <textarea
+            name="alcohol"
+            id="alcohol"
+            placeholder="Comente com qual frequência você consome bebidas alcoólicas e quais?"
+            value={alcohol}
+            onChange={(e) => setAlcohol(e.target.value)}
+            ref={alcoholRef}
           />
         </label>
 
-       
         <label>
-          <span>Você consome bebidas alcoólicas?</span>
-          {options.map((option) => (
-            <label key={option} className={styles.radio}>
-              <input
-                type="radio"
-                id="alcohol"
-                value={option}
-                checked={alcohol === option}
-                onChange={alcoholChoice}
-              />
-                     {option}
-            </label>
-          ))}
-        </label>
-        <label>
-          <span>Se sim, com qual frequência?</span>
-          <input
-            type="text"
-            name="alcoholfrequency"
-            placeholder=""
-            value={alcoholfrequency}
-            onChange={(e) => setAlcoholFrequency(e.target.value)}
-          />
-        </label>
-        <label>
-          <span>Você possui tatuagens?</span>
-          {options.map((option) => (
-            <label key={option} className={styles.radio}>
-              <input
-                type="radio"
-                id="tatoo"
-                value={option}
-                checked={tattoos === option}
-                onChange={tattoosChoice}
-              />
-                     {option}
-            </label>
-          ))}
-        </label>
-       
-        <label>
-          <span>Voce faz atividades físicas?</span>
+          <div>
+            <span>
+              Voce faz atividades físicas? Se sim, com qual frequência e quais
+              exercícios.
+            </span>
+            <button onClick={handleYesPhysicalExercise}>SIM</button>
+            <button onClick={handleNoPhysicalExercise}>Não</button>
+          </div>
           <textarea
-            name="physicalexercise"
+            name="physicalExercise"
+            id="physicalExercise"
             placeholder="Descreva sua rotina de exercícios físicos"
             value={physicalExercise}
             onChange={(e) => setPhysicalExercise(e.target.value)}
+            ref={physicalExerciseRef}
+          />
+        </label>
+
+        <label>
+          <div>
+            <span>
+              Voce possui tatuagens. Se sim, quantas e em qual região do corpo.
+            </span>
+            <button onClick={handleYesTattoos}>SIM</button>
+            <button onClick={handleNoTattoos}>Não</button>
+          </div>
+          <textarea
+            name="tattoos"
+            id="tattoos"
+            placeholder="Descreva suas tatuagens"
+            value={tattoos}
+            onChange={(e) => setTattoos(e.target.value)}
+            ref={tattoosRef}
           />
         </label>
 

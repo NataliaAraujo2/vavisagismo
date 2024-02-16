@@ -3,7 +3,6 @@ import styles from "./Data.module.css";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
 
-
 const BodyMeasurement = () => {
   const [shoulderMeasure, setShoulderMeasure] = useState("");
   const [waistMeasure, setWaistMeasure] = useState("");
@@ -12,9 +11,9 @@ const BodyMeasurement = () => {
   const [success, setSuccess] = useState(false);
 
   //ureRef focus
-const shoulderMeasureRef = useRef(null)
-const waistMeasureRef = useRef(null)
-const hipMeasureRef = useRef(null)
+  const shoulderMeasureRef = useRef(null);
+  const waistMeasureRef = useRef(null);
+  const hipMeasureRef = useRef(null);
 
   const { user } = useAuthValue();
 
@@ -22,35 +21,33 @@ const hipMeasureRef = useRef(null)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormError("")
-    setSuccess("")
+    setFormError("");
+    setSuccess(false);
 
     if (!shoulderMeasure) {
       setFormError("A medida do ombro é obrigatória!");
-      shoulderMeasureRef.current.focus()
+      shoulderMeasureRef.current.focus();
       return;
     }
 
     if (!waistMeasure) {
       setFormError("A medida do cintura é obrigatória!");
-      waistMeasureRef.current.focus()
+      waistMeasureRef.current.focus();
       return;
     }
 
     if (!hipMeasure) {
       setFormError("A medida do quadril é obrigatória!");
-      hipMeasureRef.current.focus()
+      hipMeasureRef.current.focus();
       return;
     }
 
     insertDocument({
+      uid: user.uid,
       shoulderMeasure,
       waistMeasure,
       hipMeasure,
-      uid: user.uid,
     });
-
-   
 
     setSuccess(true);
     setShoulderMeasure("");

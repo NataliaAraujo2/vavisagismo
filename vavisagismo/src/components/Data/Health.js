@@ -171,6 +171,7 @@ const handleYesDentalTreatment = (e) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
+    setSuccess(false)
 
     if (!pathologies) {
       setFormError(

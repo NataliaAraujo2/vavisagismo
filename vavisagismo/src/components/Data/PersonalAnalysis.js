@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./Data.module.css";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
 
 const PersonalAnalysis = () => {
+  //Form const
   const [nakedBody, setNakedBody] = useState("");
   const [formallyDressed, setFormallyDressed] = useState("");
   const [informallyDressed, setInformallyDressed] = useState("");
   const [sunExposedSkin, setSunExposedSkin] = useState("");
   const [faceMakeup, setFaceMakeup] = useState("");
   const [cleanFace, setCleanFace] = useState("");
+
+  //Ref to focus
+  const nakedBodyRef = useRef(null);
+  const formallyDressedRef = useRef(null);
+  const informallyDressedRef = useRef(null);
+  const sunExposedSkinRef = useRef(null);
+  const faceMakeupRef = useRef(null);
+  const cleanFaceRef = useRef(null);
+
+  //const Form Error e Success
 
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
@@ -24,11 +35,48 @@ const PersonalAnalysis = () => {
     setSunExposedSkin(e.target.value);
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
-    setSuccess("");
+    setSuccess(false);
+
+    if (!nakedBody) {
+      setFormError("Como voce avalia o seu corpo desnudo? Resposta Obrigatória!.");
+      nakedBodyRef.current.focus();
+      return;
+    }
+
+    if (!formallyDressed) {
+      setFormError("Como voce avalia o seu corpo vestido formalmente? Resposta Obrigatória!");
+      formallyDressedRef.current.focus();
+      return;
+    }
+
+    if (!informallyDressed) {
+      setFormError("Como voce avalia o seu corpo vestido informalmente? Resposta Obrigatória!");
+      informallyDressedRef.current.focus();
+      return;
+    }
+
+
+    if (!faceMakeup) {
+      setFormError("Como voce avalia o seu rosto maquiado? Resposta Obrigatória!");
+      faceMakeupRef.current.focus();
+      return;
+    }
+
+    if (!cleanFace) {
+      setFormError("Como voce avalia o seu rosto sem maquiagem? Resposta Obrigatória!");
+      cleanFaceRef.current.focus();
+      return;
+    }
+
+    
+    if (!sunExposedSkin) {
+      setFormError("Quando exposto ao sol como sua pele fica? Resposta Obrigatória!");
+      sunExposedSkinRef.current.focus();
+      return;
+    }
 
     insertDocument({
       uid: user.uid,
@@ -61,6 +109,7 @@ const PersonalAnalysis = () => {
             placeholder=""
             value={nakedBody}
             onChange={(e) => setNakedBody(e.target.value)}
+            ref={nakedBodyRef}
           />
         </label>
 
@@ -71,6 +120,7 @@ const PersonalAnalysis = () => {
             placeholder=""
             value={formallyDressed}
             onChange={(e) => setFormallyDressed(e.target.value)}
+            ref={formallyDressedRef}
           />
         </label>
 
@@ -81,6 +131,7 @@ const PersonalAnalysis = () => {
             placeholder=""
             value={informallyDressed}
             onChange={(e) => setInformallyDressed(e.target.value)}
+            ref={informallyDressedRef}
           />
         </label>
 
@@ -91,6 +142,7 @@ const PersonalAnalysis = () => {
             placeholder=""
             value={faceMakeup}
             onChange={(e) => setFaceMakeup(e.target.value)}
+            ref={faceMakeupRef}
           />
         </label>
 
@@ -101,6 +153,7 @@ const PersonalAnalysis = () => {
             placeholder=""
             value={cleanFace}
             onChange={(e) => setCleanFace(e.target.value)}
+            ref={cleanFaceRef}
           />
         </label>
 
@@ -113,6 +166,7 @@ const PersonalAnalysis = () => {
                 value={option}
                 checked={sunExposedSkin === option}
                 onChange={handleChange}
+                ref={sunExposedSkinRef}
               />
               {option}
             </label>
