@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import styles from "./Form.module.css";
-import PersonalData from "../../components/Data/PersonalData";
-import ContactData from "../../components/Data/ContactData";
-import AboutMe from "../../components/Data/AboutMe";
-import Images from "../../components/Data/Images";
-import BodyMeasurement from "../../components/Data/BodyMeasurement";
-import Lifestyle from "../../components/Data/Lifestyle";
-import Health from "../../components/Data/Health";
-import PersonalAnalysis from "../../components/Data/PersonalAnalysis";
-import PersonalStyle from "../../components/Data/PersonalStyle";
+import PersonalData from "../../../components/Data/PersonalData";
+import ContactData from "../../../components/Data/ContactData";
+import AboutMe from "../../../components/Data/AboutMe";
+import Images from "../../../components/Data/Images";
+import BodyMeasurement from "../../../components/Data/BodyMeasurement";
+import Lifestyle from "../../../components/Data/Lifestyle";
+import Health from "../../../components/Data/Health";
+import PersonalAnalysis from "../../../components/Data/PersonalAnalysis";
+import PersonalStyle from "../../../components/Data/PersonalStyle";
+import Conclusion from "../../../components/Data/Conclusion";
 
 const Form = () => {
   const [showPersonalData, setPersonalData] = useState(false);
@@ -20,6 +21,7 @@ const Form = () => {
   const [showHealth, setHealth] = useState(false);
   const [showPersonalAnalysis, setPersonalAnalysis] = useState(false);
   const [showPersonalStyle, setPersonalStyle] = useState(false);
+  const [showConclusion, setConclusion] = useState(false);
 
   const personalData = () => {
     setPersonalData(true);
@@ -31,6 +33,7 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(false);
     setPersonalStyle(false);
+    setConclusion(false);
     window.scrollTo(0, 0);
   };
 
@@ -44,6 +47,7 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(false);
     setPersonalStyle(false);
+    setConclusion(false);
     window.scrollTo(0, 0);
   };
 
@@ -57,6 +61,7 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(false);
     setPersonalStyle(false);
+    setConclusion(false);
     window.scrollTo(0, 0);
   };
 
@@ -70,6 +75,7 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(false);
     setPersonalStyle(false);
+    setConclusion(false);
     window.scrollTo(0, 0);
   };
 
@@ -83,6 +89,7 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(false);
     setPersonalStyle(false);
+    setConclusion(false);
     window.scrollTo(0, 0);
   };
 
@@ -96,6 +103,7 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(false);
     setPersonalStyle(false);
+    setConclusion(false);
     window.scrollTo(0, 0);
   };
 
@@ -109,6 +117,7 @@ const Form = () => {
     setHealth(true);
     setPersonalAnalysis(false);
     setPersonalStyle(false);
+    setConclusion(false);
     window.scrollTo(0, 0);
   };
 
@@ -122,7 +131,8 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(true);
     setPersonalStyle(false);
-    window.scrollTo(0, 0);  
+    setConclusion(false);
+    window.scrollTo(0, 0);
   };
 
   const personalStyle = () => {
@@ -135,6 +145,22 @@ const Form = () => {
     setHealth(false);
     setPersonalAnalysis(false);
     setPersonalStyle(true);
+    setConclusion(false);
+    window.scrollTo(0, 0);
+  };
+
+  
+  const conclusion = () => {
+    setPersonalData(false);
+    setContactData(false);
+    setAboutMe(false);
+    setImages(false);
+    setBodyMeasurement(false);
+    setLifestyle(false);
+    setHealth(false);
+    setPersonalAnalysis(false);
+    setPersonalStyle(false);
+    setConclusion(true);
     window.scrollTo(0, 0);
   };
 
@@ -186,6 +212,9 @@ const Form = () => {
         <button onClick={images} className={showImages ? styles.active : ""}>
           Fotos
         </button>
+        <button onClick={conclusion} className={showConclusion ? styles.active : ""}>
+          Revisão e Envio
+        </button>
       </div>
       {!showPersonalData &&
       !showContactdata &&
@@ -195,7 +224,8 @@ const Form = () => {
       !showLifestyle &&
       !showHealth &&
       !showPersonalAnalysis &&
-      !showPersonalStyle ? (
+      !showPersonalStyle &&
+      !showConclusion ? (
         <div className={styles.message}>
           <p>
             “Nossa imagem externa é nosso mensageiro, uma declaração pública.
@@ -224,6 +254,7 @@ const Form = () => {
           {showHealth === true && <Health />}
           {showPersonalAnalysis === true && <PersonalAnalysis />}
           {showPersonalStyle === true && <PersonalStyle />}
+          {showConclusion === true && <Conclusion />}
         </div>
       )}
     </div>

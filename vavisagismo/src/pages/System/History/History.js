@@ -3,7 +3,7 @@ import styles from "./History.module.css"
 
 const History = () => {
   return (
-    <div>History</div>
+    <div className={styles.history}>History</div>
   )
 }
 

@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 0;
+  margin-top: 10em;
   padding: 0;
 }
 
@@ -18,7 +18,7 @@
 
 .homeNoUser p {
   font-size: 1em;
-  padding: 0.7npm em;
+  padding: 0.7em;
   margin: 0 1em;
   text-align: justify;
 }
@@ -28,24 +28,7 @@
   flex-direction: column;
 }
 
-.homeUser {
-  height: 60vh;
-  background-image: url("../../images/logot.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
 
-.homeUser h1 {
-  color: var(--main-dark);
-}
-
-.homeUser p {
-  font-weight: bolder;
-}
 
 @media (max-width: 1000px) {
   .homeNoUser {

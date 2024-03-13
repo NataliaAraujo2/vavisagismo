@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import { useAuthentication } from "../../hooks/useAuthentication";
-import { useInsertDocument } from "../../hooks/useInsertDocument";
-import { useAuthValue } from "../../context/AuthContext";
 
 const Register = () => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+
   const [error, setError] = useState("");
 
   const { createUser, error: authError, loading } = useAuthentication();
-
-  const { user } = useAuthValue();
-
-  const { insertDocument, response } = useInsertDocument("aboutme");
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +21,7 @@ const Register = () => {
       displayName,
       email,
       password,
+      photoURL,
     };
 
     if (password !== confirmPassword) {
@@ -36,8 +32,6 @@ const Register = () => {
     const res = await createUser(user);
 
     console.log(res);
-
-    
   };
 
   useEffect(() => {
@@ -99,6 +93,7 @@ const Register = () => {
             autoComplete="new-password"
           />
         </label>
+
         {!loading && <button>Cadastrar</button>}
         {loading && <button disabled>Aguarde...</button>}
         {error && <p className="error">{error}</p>}

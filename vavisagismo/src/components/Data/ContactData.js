@@ -1,7 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Data.module.css";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
+import { useQueries } from "../../hooks/useQueries";
+import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import { useUpdateDocument } from "../../hooks/useUpdateDocument";
 
 const ContactData = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -10,6 +13,14 @@ const ContactData = () => {
   const [linkedin, setLinkedin] = useState("");
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState(false);
+
+  //deal with memory leak
+  const [cancelled, setCancelled] = useState(false);
+
+  //const no render
+  const { filter: filterConclusion, document: filteredConclusion } =
+    useQueries("conclusion");
+  const [noRender, setNoRender] = useState(false);
 
   //useRef focus
   const phoneNumberRef = useRef(null);
@@ -23,6 +34,8 @@ const ContactData = () => {
 
   //insertDocument Const
   const { insertDocument, response } = useInsertDocument("contactdata");
+  const { documents: contactdata } = useFetchDocuments("contactdata", user.uid);
+  const { updateDocument } = useUpdateDocument("contactdata");
 
   //Phone Mask
   const phoneMask = (value) => {
@@ -41,6 +54,26 @@ const ContactData = () => {
   const [toggleInstagram, setToggleInstagram] = useState(false);
   const [toggleFacebook, setToggleFacebook] = useState(false);
   const [toggleLinkedin, setToggleLinkedin] = useState(false);
+
+  useEffect(() => {
+    async function loadData() {
+      if (cancelled) return;
+
+      const field = "uid";
+      const demand = user.uid;
+      await filterConclusion(field, demand);
+    }
+
+    loadData();
+
+    if (filteredConclusion) {
+      setNoRender(true);
+    }
+
+    return () => {
+      setCancelled(true);
+    };
+  }, [cancelled, filterConclusion, filteredConclusion, user.uid]);
 
   //Disabled inputs function
   const handleDisabledInputInstagram = (e) => {
@@ -120,14 +153,32 @@ const ContactData = () => {
       return;
     }
 
-    insertDocument({
+    const data = {
       email: user.email,
       phoneNumber,
       instagram,
       facebook,
       linkedin,
-      uid: user.uid,
-    });
+    };
+
+    if (contactdata) {
+      for (var i = 0; i < contactdata.length; i++) {
+        if (contactdata[i].uid === user.uid) {
+          updateDocument(contactdata[i].id, data);
+        }
+      }
+    }
+
+    if (contactdata.length === 0) {
+      insertDocument({
+        email: user.email,
+        phoneNumber,
+        instagram,
+        facebook,
+        linkedin,
+        uid: user.uid,
+      });
+    }
 
     //clear data fields
     setSuccess(true);
@@ -147,75 +198,81 @@ const ContactData = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <span>Email: {email}</span>
-        <label>
-          <span>Telefone:</span>
-          <input
-            type="tel"
-            maxLength="15"
-            onKeyUp={handlePhone}
-            ref={phoneNumberRef}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </label>
-        <label>
-          <div className={styles.disabled}>
-            <span>Instagram:</span>
-            <button onClick={handleDisabledInputInstagram}>
-              {toggleInstagram ? "Possuo" : "Não Possuo"}
-            </button>
-          </div>
-          <input
-            type="text"
-            id="instagram"
-            name="instagram"
-            placeholder="Endereço do Instagram"
-            value={instagram}
-            onChange={(e) => setInstagram(e.target.value)}
-            ref={instagramRef}
-          />
-        </label>
-        <label>
-        <div className={styles.disabled}>
-            <span>Facebook:</span>
-            <button onClick={handleDisabledInputFacebook}>
-              {toggleFacebook ? "Possuo" : "Não Possuo"}
-            </button>
-          </div>
-          <input
-            type="text"
-            id="facebook"
-            name="facebook"
-            placeholder="Endereço do Facebook"
-            value={facebook}
-            onChange={(e) => setFacebook(e.target.value)}
-            ref={facebookRef}
-          />
-        </label>
-        <label>
-        <div className={styles.disabled}>
-            <span>Linkedin:</span>
-            <button onClick={handleDisabledInputLinkedin}>
-              {toggleLinkedin ? "Possuo" : "Não Possuo"}
-            </button>
-          </div>
-          <input
-            type="text"
-            name="linkedin"
-            id="linkedin"
-            placeholder="Endereço do Linkedin"
-            value={linkedin}
-            onChange={(e) => setLinkedin(e.target.value)}
-            ref={linkedinRef}
-          />
-        </label>
-        {!response.loading && <button>Enviar</button>}
-        {response.loading && <button disabled>Aguarde...</button>}
-        {response.error && <p className="error">{response.error}</p>}
-        {formError && <p className="error">{formError}</p>}
-        {success && <p className="success">Respostas enviadas com sucesso!</p>}
-      </form>
+      {noRender ? (
+        <div className="danger"> FORMULÁRIO JÁ RESPONDIDO</div>
+      ) : (
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <span>Email: {email}</span>
+          <label>
+            <span>Telefone:</span>
+            <input
+              type="tel"
+              maxLength="15"
+              onKeyUp={handlePhone}
+              ref={phoneNumberRef}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </label>
+          <label>
+            <div className={styles.disabled}>
+              <span>Instagram:</span>
+              <button onClick={handleDisabledInputInstagram}>
+                {toggleInstagram ? "Possuo" : "Não Possuo"}
+              </button>
+            </div>
+            <input
+              type="text"
+              id="instagram"
+              name="instagram"
+              placeholder="Endereço do Instagram"
+              value={instagram}
+              onChange={(e) => setInstagram(e.target.value)}
+              ref={instagramRef}
+            />
+          </label>
+          <label>
+            <div className={styles.disabled}>
+              <span>Facebook:</span>
+              <button onClick={handleDisabledInputFacebook}>
+                {toggleFacebook ? "Possuo" : "Não Possuo"}
+              </button>
+            </div>
+            <input
+              type="text"
+              id="facebook"
+              name="facebook"
+              placeholder="Endereço do Facebook"
+              value={facebook}
+              onChange={(e) => setFacebook(e.target.value)}
+              ref={facebookRef}
+            />
+          </label>
+          <label>
+            <div className={styles.disabled}>
+              <span>Linkedin:</span>
+              <button onClick={handleDisabledInputLinkedin}>
+                {toggleLinkedin ? "Possuo" : "Não Possuo"}
+              </button>
+            </div>
+            <input
+              type="text"
+              name="linkedin"
+              id="linkedin"
+              placeholder="Endereço do Linkedin"
+              value={linkedin}
+              onChange={(e) => setLinkedin(e.target.value)}
+              ref={linkedinRef}
+            />
+          </label>
+          {!response.loading && <button>Enviar</button>}
+          {response.loading && <button disabled>Aguarde...</button>}
+          {response.error && <p className="error">{response.error}</p>}
+          {formError && <p className="error">{formError}</p>}
+          {success && (
+            <p className="success">Respostas enviadas com sucesso!</p>
+          )}
+        </form>
+      )}
     </div>
   );
 };

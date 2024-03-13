@@ -1,7 +1,11 @@
 import { useState, useEffect, useReducer } from "react";
 import { db } from "../firebase/config";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 const initialState = {
   loading: null,
@@ -12,7 +16,7 @@ const insertReducer = (state, action) => {
   switch (action.type) {
     case "LOADING":
       return { loading: true, error: null };
-    case "INSERTED_DOC":
+    case "FILTERED_DOC":
       return { loading: false, error: null };
     case "ERROR":
       return { loading: false, error: action.payload };
@@ -21,8 +25,10 @@ const insertReducer = (state, action) => {
   }
 };
 
-export const useInsertDocument = (docCollection) => {
+export const useQueries = (docCollection) => {
   const [response, dispatch] = useReducer(insertReducer, initialState);
+  const [document, setDocument] = useState("");
+  const [idDocument, setIdDocument] = useState("")
 
   //deal with memory leak
   const [cancelled, setCancelled] = useState(false);
@@ -33,20 +39,26 @@ export const useInsertDocument = (docCollection) => {
     }
   };
 
-
-  const insertDocument = async (document) => {
+  const filter = async (field, demand) => {
     checkCancelBeforeDispatch({ type: "LOADING" });
 
     try {
-      const newDocument = { ...document, createAt: Timestamp.now().toDate() };
-      const insertedDocument = await addDoc(
+      const q = query(
         collection(db, docCollection),
-        newDocument
+        where(field, "==", demand)
       );
 
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setIdDocument(doc.id)
+        setDocument(doc.data());
+      });
+      
+    //   console.log(document);
+
       checkCancelBeforeDispatch({
-        type: "INSERTED_DOC",
-        payload: insertedDocument,
+        type: "FILTERED_DOC",
+        payload: querySnapshot,
       });
     } catch (error) {
       checkCancelBeforeDispatch({
@@ -61,5 +73,5 @@ export const useInsertDocument = (docCollection) => {
     return () => setCancelled(true);
   }, []);
 
-  return { insertDocument, response };
+  return { filter, document, idDocument, response };
 };

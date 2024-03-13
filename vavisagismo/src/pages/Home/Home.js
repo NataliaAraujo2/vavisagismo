@@ -4,14 +4,12 @@ import { useAuthValue } from "../../context/AuthContext";
 import image from "../../images/2.png";
 
 const Home = () => {
-  const { user } = useAuthValue();
   const goWhatsApp = () => {
     window.open(`https://wa.me/5511987587322`, "blank");
   };
 
   return (
-    <>
-      {!user ? (
+   
         <div className={styles.homeNoUser}>
           <img src={image} alt="Imagem Visagismo" />
           <div className={styles.text}>
@@ -72,18 +70,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <>
-          <div className={styles.homeUser}>
-            <h1>Seja Bem Vindo {user.displayName}!</h1>
-            <p>
-              Envie novas informações através de nosso formulário ou veja seu
-              histórico!
-            </p>
-          </div>
-        </>
-      )}
-    </>
+    
+    
   );
 };
 

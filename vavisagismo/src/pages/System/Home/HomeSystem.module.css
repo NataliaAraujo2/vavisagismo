@@ -1,0 +1,18 @@
+.homeUser {
+    height: 60vh;
+    background-image: url("../../../images/logot.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .homeUser h1 {
+    color: var(--main-dark);
+  }
+  
+  .homeUser p {
+    font-weight: bolder;
+  }

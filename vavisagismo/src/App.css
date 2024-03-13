@@ -1,15 +1,16 @@
 .container {
-  min-height:70vh;
+  min-height:85vh;
   margin-top: 9em;
   margin-bottom: 1em;
 }
 
 
-@media(max-width:500px) {
+
+@media(max-width:1000px) {
   .container {
     width: 100%;
-    min-height: 75vh;
-    margin-top: 0;
+    height: fit-content;
+    margin-top:0;
     font-size: .8em;
   }
 

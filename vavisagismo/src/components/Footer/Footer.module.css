@@ -1,32 +1,35 @@
 .footer {
-  height: 164px;
+  height: 75px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-around;
   background-color: var(--main-light);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  padding-bottom: 2em;
 }
 
 .footer svg {
   font-size: 4em;
   color: var(--main-dark);
+  text-align: center;
 }
 
 .contact {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:space-around;
+  justify-content: space-around;
   padding: 1em;
   width: 70%;
 }
 
-@media (max-width: 1000px)  {
+@media (max-width: 1000px) {
   .footer {
-    width:100% ;
+    width: 100%;
     height: fit-content;
-    padding-top: 1em;   
+    padding-top: 1em;
   }
 
   .footer svg {

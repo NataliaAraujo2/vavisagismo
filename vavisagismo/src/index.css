@@ -29,6 +29,7 @@ input:focus {
 p {
   padding: 0.5em;
 }
+
 a,
 nav button {
   text-decoration: none;
@@ -77,6 +78,7 @@ textarea {
 
 button {
   font-family: "Lexend Zetta", sans-serif;
+  cursor: pointer;
   width: fit-content;
   font-weight: bold;
   background-color: var(--main-light);
@@ -94,9 +96,18 @@ button[disabled] {
   border: 1px solid var(--main-light);
 }
 
+
+span {
+  font-weight: bold;
+}
+
 .danger {
   background-color: var(--main-dark);
   color: var(--main-light);
+  text-align: center;
+  width:fit-content;
+  height: 100%;
+  padding: 1em;
 }
 
 .container .error {

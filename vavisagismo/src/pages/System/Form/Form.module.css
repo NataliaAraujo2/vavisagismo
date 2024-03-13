@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: row;
-  margin-top: 8em;
+  margin-top: 5em;
   align-items: center;
   justify-content: space-around;
   width: 100%;
@@ -11,16 +11,18 @@
   display: flex;
   flex-direction: column;
   width: 15%;
-  margin-left: 1em;
-  padding: 0 2em 0 0;
+  padding: 0 0 0 0;
   position: fixed;
-  top: 10em;
+  top: 9em;
   left: 0;  
 }
 
 .buttons button {
   white-space: normal;
   width: 100%;
+  margin: 0;
+  margin-top: 1em;
+  margin-left: 1em;
 }
 
 .message {
@@ -31,11 +33,11 @@
 }
 
 .component {
-  width: 85%;
+  width: 80%;
   margin-left: 17.5%;
   margin-top: 1em;
   padding: 1em;
-  border-left: 5px double var(--main-dark);
+  border: 5px double var(--main-dark);
 }
 
 .active {
@@ -50,7 +52,7 @@
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
-    margin-top: 1em;
+    margin-top: 0;
   }
 
   .buttons {
@@ -88,4 +90,6 @@
     padding: 1em;
     border-left: none;
   }
+
+  
 }

@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import styles from "./Admin.module.css";
+
+import SideBar from "../../components/Admin/SideBar";
 
 const Admin = () => {
-  return (
-    <div>Admin</div>
-  )
-}
+ 
 
-export default Admin
+  return (
+    <div className={styles.admin}>
+      <SideBar />
+
+      <div className={styles.main}></div>
+    </div>
+  );
+};
+
+export default Admin;

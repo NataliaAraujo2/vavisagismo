@@ -9,7 +9,7 @@ import { useAuthentication } from "./hooks/useAuthentication";
 //context
 import { AuthProvider } from "./context/AuthContext";
 //pages
-import Form from "./pages/Form/Form";
+import Form from "./pages/System/Form/Form";
 import Admin from "./pages/Admin/Admin";
 //components
 import Navbar from "./components/Navbar/Navbar";
@@ -17,11 +17,18 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
-import History from "./pages/History/History";
+import History from "./pages/System/History/History";
 import About from "./pages/About/About";
+import AuthUsers from "./pages/Admin/AuthUsers";
+import EditAuth from "./pages/Admin/EditAuth";
+import HomeSystem from "./pages/System/Home/HomeSystem";
+import Users from "./pages/Admin/Users";
+import UserData from "./pages/Admin/UserData";
+import ResumeData from "./components/Data/ResumeData";
 
 function App() {
   const [user, setUser] = useState(undefined);
+
   const { auth } = useAuthentication();
 
   const loadingUser = user === undefined;
@@ -40,35 +47,60 @@ function App() {
     <div className="App">
       <AuthProvider value={{ user }}>
         <BrowserRouter>
-          <Navbar />
+          <Navbar key={user} />
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
               <Route
-                path="/form"
-                element={user ? <Form /> : <Navigate to="/login" />}
+                path="/register"
+                element={
+                  !user ? <Register /> : <Navigate to="/system/homesystem" />
+                }
               />
               <Route
-                path="/history"
-                element={user ? <History /> : <Navigate to="/login" />}
+                path="/login"
+                element={
+                  !user ? <Login /> : <Navigate to="/system/homesystem" />
+                }
               />
               <Route
                 path="/admin"
                 element={user ? <Admin /> : <Navigate to="/login" />}
               />
+
               <Route
-                path="/register"
-                element={!user ? <Register /> : <Navigate to="/" />}
+                path="/admin/authusers"
+                element={user ? <AuthUsers /> : <Navigate to="/login" />}
               />
               <Route
-                path="/login"
-                element={!user ? <Login /> : <Navigate to="/" />}
+                path="/admin/editAuth/:id"
+                element={user ? <EditAuth /> : <Navigate to="/login" />}
+              />
+                  <Route
+                path="/admin/userData/:id"
+                element={user ? <UserData /> : <Navigate to="/login" />}
+              />
+
+              <Route
+                path="/admin/users"
+                element={user ? <Users /> : <Navigate to="/login" />}
+              />
+
+            
+              <Route
+                path="/system/homesystem"
+                element={user ? <HomeSystem /> : <Navigate to="/login" />}
+              />
+
+              <Route
+                path="/system/form/:id"
+                element={user ? <Form /> : <Navigate to="/login" />}
               />
               <Route
-                path="/"
-                element={user ? <Admin /> : <Navigate to="/login" />}
+                path="/system/history/:id"
+                element={user ? <History /> : <Navigate to="/login" />}
               />
-              <Route path="/about" element={<About />} />
             </Routes>
           </div>
           <Footer />
