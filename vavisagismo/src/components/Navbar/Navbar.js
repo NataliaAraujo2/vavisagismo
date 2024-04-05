@@ -13,10 +13,8 @@ const Navbar = () => {
   const [authUser, setAuthUser] = useState(false);
   const [id, setId] = useState("");
   const [uid, setUid] = useState("");
-  const [dateNow, setDateNow] = useState("");
   const [cancelled, setCancelled] = useState(false);
   const [photoUrl, setPhotoUrl] = useState("https://firebasestorage.googleapis.com/v0/b/vmavisagismo.appspot.com/o/logobremoved.png?alt=media&token=e259ce3f-06bd-4e9a-9429-3e1a85a3eb99");
-  const [keepState, setKeepState] = useState(false);
 
   const { user } = useAuthValue();
   const { logout } = useAuthentication();
@@ -61,66 +59,12 @@ const Navbar = () => {
 
     loadData();
  
-    if(document.authUser) {
-      if(document.authUser === "admin" ) {
-        setAuthUser(true)
-      }
-    } else {
-      setAuthUser(false)
-    }
   
     return () => setCancelled(true);
   }, [document, filter, user, navigate, uid, cancelled, authUser]);
 
  
-  
 
-  const date = () => {
-    const now = new Date();
-
-    const dayName = [
-      "domingo",
-      "segunda",
-      "terça",
-      "quarta",
-      "quinta",
-      "sexta",
-      "sábado",
-    ];
-
-    const monName = [
-      "janeiro",
-      "fevereiro",
-      "março",
-      "abril",
-      "maio",
-      "junho",
-      "agosto",
-      "outubro",
-      "novembro",
-      "dezembro",
-    ];
-
-    const agora = ` ${dayName[now.getDay()]}, ${now.getDate()} de ${
-      monName[now.getMonth()]
-    } de ${now.getFullYear()}`;
-
-    setDateNow(agora);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    date();
-    setKeepState(true);
-    navigate("/admin");
-  };
-
-  const returnSystem = (e) => {
-    e.preventDefault();
-    setKeepState(false);
-    navigate("/");
-    window.location.reload();
-  };
 
   return (
     <nav className={styles.navbar}>
@@ -130,7 +74,7 @@ const Navbar = () => {
       
 
       <ul className={styles.link_list}>
-        {!keepState ? (
+       
           <>
             {user ? (
               <>
@@ -138,7 +82,7 @@ const Navbar = () => {
                   <div className={styles.link_list}>
                     <li>
                       <NavLink
-                        to={`/system/form/${id}`}
+                        to={`/system/form`}
                         className={({ isActive }) =>
                           isActive ? styles.active : ""
                         }
@@ -156,20 +100,7 @@ const Navbar = () => {
                         Histórico
                       </NavLink>
                     </li>
-                    <>
-                      {authUser && (
-                        <li>
-                          <NavLink
-                            className={({ isActive }) =>
-                              isActive ? styles.active : ""
-                            }
-                            onClick={handleSubmit}
-                          >
-                            Admin
-                          </NavLink>
-                        </li>
-                      )}
-                    </>
+                  
                     <li>
                       <NavLink
                         to="/"
@@ -228,16 +159,7 @@ const Navbar = () => {
               </>
             )}
           </>
-        ) : (
-          <>
-            <div className={styles.dateNow}>
-              <li>{dateNow}</li>
-              <li>
-                <button onClick={returnSystem}>Sair</button>
-              </li>
-            </div>
-          </>
-        )}
+      
       </ul>
     </nav>
   );

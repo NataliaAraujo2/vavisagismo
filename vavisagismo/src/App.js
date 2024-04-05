@@ -10,7 +10,7 @@ import { useAuthentication } from "./hooks/useAuthentication";
 import { AuthProvider } from "./context/AuthContext";
 //pages
 import Form from "./pages/System/Form/Form";
-import Admin from "./pages/Admin/Admin";
+
 //components
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
@@ -19,11 +19,9 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import History from "./pages/System/History/History";
 import About from "./pages/About/About";
-import AuthUsers from "./pages/Admin/AuthUsers";
-import EditAuth from "./pages/Admin/EditAuth";
+
 import HomeSystem from "./pages/System/Home/HomeSystem";
-import Users from "./pages/Admin/Users";
-import UserData from "./pages/Admin/UserData";
+
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -46,7 +44,7 @@ function App() {
     <div className="App">
       <AuthProvider value={{ user }}>
         <BrowserRouter>
-          <Navbar key={user} />
+          <Navbar />
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -63,29 +61,7 @@ function App() {
                   !user ? <Login /> : <Navigate to="/system/homesystem" />
                 }
               />
-              <Route
-                path="/admin"
-                element={user ? <Admin /> : <Navigate to="/login" />}
-              />
-
-              <Route
-                path="/admin/authusers"
-                element={user ? <AuthUsers /> : <Navigate to="/login" />}
-              />
-              <Route
-                path="/admin/editAuth/:id"
-                element={user ? <EditAuth /> : <Navigate to="/login" />}
-              />
-                  <Route
-                path="/admin/userData/:id"
-                element={user ? <UserData /> : <Navigate to="/login" />}
-              />
-
-              <Route
-                path="/admin/users"
-                element={user ? <Users /> : <Navigate to="/login" />}
-              />
-
+            
             
               <Route
                 path="/system/homesystem"
@@ -93,7 +69,7 @@ function App() {
               />
 
               <Route
-                path="/system/form/:id"
+                path="/system/form"
                 element={user ? <Form /> : <Navigate to="/login" />}
               />
               <Route

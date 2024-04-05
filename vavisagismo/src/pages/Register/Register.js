@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import { useAuthentication } from "../../hooks/useAuthentication";
+import { useNavigate } from "react-router-dom"
 
 
 const Register = () => {
@@ -9,7 +10,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [photoURL] = useState("");
-  
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
 
@@ -37,7 +39,7 @@ const Register = () => {
 
     console.log(res);
   
-   
+   navigate("/")
   };
 
   useEffect(() => {
