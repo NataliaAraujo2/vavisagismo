@@ -4,7 +4,7 @@ import { useAuthValue } from "../../../context/AuthContext";
 
 const HomeSystem = () => {
   const [userName, setUserName] = useState("");
-  const [setUserPhoto] = useState("");
+  const [ setUserPhoto] = useState("");
   const [cancelled, setCancelled] = useState(false);
   const { user } = useAuthValue();
 
@@ -15,7 +15,12 @@ const HomeSystem = () => {
 
     if (user) {
       setUserName(user.displayName);
-      setUserPhoto(user.photoURL);
+      if(user.photoURL) {
+        setUserPhoto(user.photoURL);
+      } else {
+        setUserPhoto("https://firebasestorage.googleapis.com/v0/b/vmavisagismo.appspot.com/o/logobremoved.png?alt=media&token=e259ce3f-06bd-4e9a-9429-3e1a85a3eb99")
+      }
+ 
     }
 
     return () => {
