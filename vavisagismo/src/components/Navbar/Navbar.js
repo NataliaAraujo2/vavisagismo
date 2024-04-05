@@ -60,22 +60,14 @@ const Navbar = () => {
     }
 
     loadData();
-
+    if(user && !document.authUser) {
+      window.location.reload()
+    }
   
     return () => setCancelled(true);
   }, [document, filter, user, navigate, uid, cancelled, authUser]);
 
-  useEffect(() => {
-    if (document.authUser === "admin") {
-      setAuthUser(true);
-    }
-
-    console.log(document.authUser)
-  
-    return () => {
-    
-    }
-  }, [document.authUser])
+ 
   
 
   const date = () => {
