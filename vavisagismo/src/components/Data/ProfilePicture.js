@@ -95,9 +95,12 @@ const ProfilePicture = () => {
   };
 
   useEffect(() => {
+    
     if (user?.photoURL) {
       setPhotoUrl(user.photoURL);
-      console.log(user.photoURL);
+      
+    } else {
+      setPhotoUrl("https://firebasestorage.googleapis.com/v0/b/vmavisagismo.appspot.com/o/logobremoved.png?alt=media&token=e259ce3f-06bd-4e9a-9429-3e1a85a3eb99")
     }
   }, [user, photoUrl]);
 

@@ -15,7 +15,7 @@ const Navbar = () => {
   const [uid, setUid] = useState("");
   const [dateNow, setDateNow] = useState("");
   const [cancelled, setCancelled] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState("https://firebasestorage.googleapis.com/v0/b/vanessaalbuquerquevisagismo.appspot.com/o/images%2Flogo.png?alt=media&token=aa8651c0-fb6b-442e-a218-366ba5f5bb21");
+  const [photoUrl, setPhotoUrl] = useState("");
   const [keepState, setKeepState] = useState(false);
 
   const { user } = useAuthValue();
@@ -24,6 +24,7 @@ const Navbar = () => {
   const { filter, document } = useQueries("users");
 
   const navigate = useNavigate();
+
 
   useEffect(() => {
     async function loadData() {
@@ -44,7 +45,13 @@ const Navbar = () => {
         await querySnapshot.forEach((doc) => {
           setId(doc.id);
 
-          setPhotoUrl(user.photoURL);
+          if(user.photoURL) {
+            setPhotoUrl(user.photoURL);
+          } else {
+            setPhotoUrl("https://firebasestorage.googleapis.com/v0/b/vmavisagismo.appspot.com/o/logobremoved.png?alt=media&token=e259ce3f-06bd-4e9a-9429-3e1a85a3eb99")
+          }
+         
+          
         });
       } catch (error) {
         console.log(error);
