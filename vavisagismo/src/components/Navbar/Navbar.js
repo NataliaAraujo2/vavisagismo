@@ -15,7 +15,7 @@ const Navbar = () => {
   const [uid, setUid] = useState("");
   const [dateNow, setDateNow] = useState("");
   const [cancelled, setCancelled] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("https://firebasestorage.googleapis.com/v0/b/vmavisagismo.appspot.com/o/logobremoved.png?alt=media&token=e259ce3f-06bd-4e9a-9429-3e1a85a3eb99");
   const [keepState, setKeepState] = useState(false);
 
   const { user } = useAuthValue();
@@ -60,8 +60,13 @@ const Navbar = () => {
     }
 
     loadData();
-    if(user && !document.authUser) {
-      window.location.reload()
+ 
+    if(document.authUser) {
+      if(document.authUser === "admin" ) {
+        setAuthUser(true)
+      }
+    } else {
+      setAuthUser(false)
     }
   
     return () => setCancelled(true);
@@ -123,11 +128,11 @@ const Navbar = () => {
         <img src={logo} alt="Logo" />
       </NavLink>
       
-      {user && !document.authUser && <p>Carregando...</p>}
+
       <ul className={styles.link_list}>
         {!keepState ? (
           <>
-            {document ? (
+            {user ? (
               <>
                 <div className={styles.responsiveness}>
                   <div className={styles.link_list}>
