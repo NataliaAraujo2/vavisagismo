@@ -61,12 +61,22 @@ const Navbar = () => {
 
     loadData();
 
+  
+    return () => setCancelled(true);
+  }, [document, filter, user, navigate, uid, cancelled, authUser]);
+
+  useEffect(() => {
     if (document.authUser === "admin") {
       setAuthUser(true);
     }
 
-    return () => setCancelled(true);
-  }, [document, filter, user, navigate, uid, cancelled, authUser]);
+    console.log(document.authUser)
+  
+    return () => {
+    
+    }
+  }, [document.authUser])
+  
 
   const date = () => {
     const now = new Date();

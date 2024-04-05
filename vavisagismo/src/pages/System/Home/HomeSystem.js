@@ -4,7 +4,7 @@ import { useAuthValue } from "../../../context/AuthContext";
 
 const HomeSystem = () => {
   const [userName, setUserName] = useState("");
-  const [userPhoto, setUserPhoto] = useState("");
+  const [setUserPhoto] = useState("");
   const [cancelled, setCancelled] = useState(false);
   const { user } = useAuthValue();
 
@@ -21,7 +21,7 @@ const HomeSystem = () => {
     return () => {
       setCancelled(true);
     };
-  }, [user, cancelled]);
+  }, [user, cancelled, setUserPhoto]);
 
   return (
     <>

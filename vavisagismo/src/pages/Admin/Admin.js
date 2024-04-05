@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Admin.module.css";
 
 import SideBar from "../../components/Admin/SideBar";

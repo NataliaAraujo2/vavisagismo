@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Home.module.css";
-import { useAuthValue } from "../../context/AuthContext";
 import image from "../../images/2.png";
 
 const Home = () => {
