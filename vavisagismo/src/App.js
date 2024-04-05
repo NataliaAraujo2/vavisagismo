@@ -52,12 +52,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route
-                path="/register"
-                element={
-                  !user ? <Register /> : <Navigate to="/system/homesystem" />
-                }
-              />
+              <Route path="/register" element={<Register />} />
               <Route
                 path="/login"
                 element={
@@ -77,7 +72,7 @@ function App() {
                 path="/admin/editAuth/:id"
                 element={user ? <EditAuth /> : <Navigate to="/login" />}
               />
-                  <Route
+              <Route
                 path="/admin/userData/:id"
                 element={user ? <UserData /> : <Navigate to="/login" />}
               />
@@ -87,7 +82,6 @@ function App() {
                 element={user ? <Users /> : <Navigate to="/login" />}
               />
 
-            
               <Route
                 path="/system/homesystem"
                 element={user ? <HomeSystem /> : <Navigate to="/login" />}
